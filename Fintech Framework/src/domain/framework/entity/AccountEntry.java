@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class AccountEntry {
     private final double amount;
     private final LocalDate date;
-    private final String description;
+    private final TransactionType transactionType;
 
-    public AccountEntry(double amount, String description) {
+    public AccountEntry(double amount, TransactionType transactionType) {
         super();
         this.date = LocalDate.now();
         this.amount = amount;
-        this.description = description;
+        this.transactionType = transactionType;
     }
 
     public double getAmount() {
@@ -22,8 +22,8 @@ public class AccountEntry {
         return date;
     }
 
-    public String getDescription() {
-        return description;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
 }
