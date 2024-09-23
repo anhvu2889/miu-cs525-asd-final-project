@@ -8,4 +8,9 @@ public class PersonalAccount extends Account {
     public PersonalAccount(String number, Customer customer) {
         super(number, customer);
     }
+
+    @Override
+    public double calculateInterest(double balance) {
+        return 0;
+    }
 }

@@ -1,13 +1,19 @@
 package domain.framework.usecase.operation;
 
 import domain.framework.entity.Account;
+import domain.framework.usecase.operation.interest.InterestCalculator;
 
 public abstract class AccountOperationServiceImpl implements AccountOperationService{
 
-    private Account account;
+    private final Account account;
+    private InterestCalculator interestCalculator;
 
     public AccountOperationServiceImpl(Account account) {
         this.account = account;
+    }
+
+    public void setInterestCalculator(InterestCalculator interestCalculator) {
+        this.interestCalculator = interestCalculator;
     }
 
     @Override
@@ -23,8 +29,12 @@ public abstract class AccountOperationServiceImpl implements AccountOperationSer
     }
 
     @Override
-    public void addInterest(double amount) {
-        account.addInterest(amount);
+    public void addInterest() {
+
+//        double amount = interestCalculator.calculateInterest(account.getBalance());
+//        account.addInterest(amount);
+//        loadAllAccount().forEach();
+        account.calculateInterest(account.getBalance());
     }
 
     public Account getAccount() {

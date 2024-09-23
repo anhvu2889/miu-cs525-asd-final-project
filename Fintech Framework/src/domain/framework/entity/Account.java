@@ -1,9 +1,11 @@
 package domain.framework.entity;
 
+import domain.framework.usecase.operation.interest.InterestCalculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public abstract class Account implements InterestCalculator {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
