@@ -1,12 +1,12 @@
 package domain.framework.usecase.notification.subject;
 
-import domain.framework.entity.Event;
+import domain.framework.entity.TransactionType;
 import domain.framework.usecase.notification.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifySubject implements Subject {
+public class NotifySubject implements Subject1 {
     protected List<Observer> observerList = new ArrayList<>();
 
     public List<Observer> getObserverList() {
@@ -24,9 +24,9 @@ public class NotifySubject implements Subject {
     }
 
     @Override
-    public void notifyObservers(Event event, Object object) {
+    public void notifyObservers(TransactionType transactionType, Object object) {
         for (Observer observer : this.observerList) {
-            observer.onUpdate(event, object);
+            observer.onUpdate(transactionType, object);
         }
     }
 }

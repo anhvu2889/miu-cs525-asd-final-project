@@ -7,7 +7,7 @@ public class SavingInterestCalculatorStrategy implements InterestCalculatorStrat
     private double interest = 0.1;
 
     @Override
-    public double getMonthlyInterest(double balance) {
+    public double calculateInterest(double balance) {
         return balance * interest;
     }
 }

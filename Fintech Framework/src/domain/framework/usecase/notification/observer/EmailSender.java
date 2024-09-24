@@ -1,7 +1,7 @@
 package domain.framework.usecase.notification.observer;
 
 import domain.framework.entity.Account;
-import domain.framework.entity.Event;
+import domain.framework.entity.TransactionType;
 
 public class EmailSender implements Observer {
     private static EmailSender instance = new EmailSender();
@@ -14,8 +14,13 @@ public class EmailSender implements Observer {
     }
 
     @Override
-    public void onUpdate(Event event, Object object) {
+    public void onUpdate(TransactionType transactionType, Object object) {
         Account acc = (Account) object;
-        System.out.println("[EMAIL]: Event: " + event + ",Account: " + acc.getCustomer().getCustomerType() + ", Email: " + acc.getCustomer().getEmail());
+        System.out.println("[EMAIL]: Event: " + transactionType + ",Account: " + acc.getCustomer().getCustomerType() + ", Email: " + acc.getCustomer().getEmail());
+    }
+
+    @Override
+    public void onUpdate() {
+
     }
 }

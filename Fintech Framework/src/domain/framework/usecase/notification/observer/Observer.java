@@ -1,7 +1,8 @@
 package domain.framework.usecase.notification.observer;
 
-import domain.framework.entity.Event;
+import domain.framework.entity.TransactionType;
 
 public interface Observer {
-    void onUpdate(Event event, Object object);
+    void onUpdate(TransactionType transactionType, Object object);
+    void onUpdate();
 }

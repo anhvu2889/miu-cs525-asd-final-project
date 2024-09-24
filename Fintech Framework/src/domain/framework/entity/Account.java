@@ -27,6 +27,7 @@ public class Account {
     public List<AccountEntry> getEntries() {
         return entries;
     }
+
     public void addEntry(AccountEntry entry) {
         entries.add(entry);
     }
@@ -40,18 +41,18 @@ public class Account {
     }
 
     public void deposit(double amount, String description) {
-        AccountEntry entry = new AccountEntry(amount, description, Event.DEPOSIT);
+        AccountEntry entry = new AccountEntry(amount, description, TransactionType.DEPOSIT);
         entries.add(entry);
     }
 
     public void withdraw(double amount, String description) {
-        AccountEntry entry = new AccountEntry(-amount, description, Event.WITHDRAW);
+        AccountEntry entry = new AccountEntry(-amount, description, TransactionType.WITHDRAWAL);
         entries.add(entry);
     }
 
     public void addInterest() {
-        double interest = this.interestCalculatorStrategy.getMonthlyInterest(getBalance());
-        AccountEntry entry = this.createEntry(interest, "interest", Event.INTEREST);
+        double interest = this.interestCalculatorStrategy.calculateInterest(getBalance());
+        AccountEntry entry = this.createEntry(interest, "interest", TransactionType.ADD_INTEREST);
         this.addEntry(entry);
     }
 
@@ -59,7 +60,7 @@ public class Account {
         this.interestCalculatorStrategy = interestCalculatorStrategy;
     }
 
-    public AccountEntry createEntry(double amount, String description, Event event) {
+    public AccountEntry createEntry(double amount, String description, TransactionType event) {
         return new AccountEntry(amount, description, event);
     }
 }

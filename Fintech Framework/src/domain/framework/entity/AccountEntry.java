@@ -6,13 +6,13 @@ public class AccountEntry {
     private final double amount;
     private final LocalDate date;
     private final String description;
-    private Event event;
+    private final TransactionType transactionType;
 
-    public AccountEntry(double amount, String description, Event event) {
+    public AccountEntry(double amount, String description, TransactionType transactionType) {
         this.date = LocalDate.now();
         this.amount = amount;
         this.description = description;
-        this.event = event;
+        this.transactionType = transactionType;
     }
 
     public double getAmount() {
@@ -27,7 +27,8 @@ public class AccountEntry {
         return description;
     }
 
-    public Event getEvent() {
-        return event;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
+
 }

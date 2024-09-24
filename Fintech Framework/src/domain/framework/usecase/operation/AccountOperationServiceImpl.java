@@ -3,20 +3,16 @@ package domain.framework.usecase.operation;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.rules.RuleEngine;
-import domain.framework.usecase.notification.observer.Observer;
-import domain.framework.usecase.notification.subject.Subject;
+import domain.framework.usecase.notification.subject.Subject1;
 import driver.repository.AccountRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AccountOperationServiceImpl<E extends Account, T extends AccountEntry> implements AccountOperationService<E, T> {
 
     private final AccountRepository repository;
     private final RuleEngine<E, T> ruleEngine;
-    private final Subject notificationSubject;
+    private final Subject1 notificationSubject;
 
-    public AccountOperationServiceImpl(AccountRepository accountRepository, RuleEngine<E, T> ruleEngine, Subject notificationSubject) {
+    public AccountOperationServiceImpl(AccountRepository accountRepository, RuleEngine<E, T> ruleEngine, Subject1 notificationSubject) {
         this.ruleEngine = ruleEngine;
         this.repository = accountRepository;
         this.notificationSubject = notificationSubject;
@@ -30,7 +26,7 @@ public class AccountOperationServiceImpl<E extends Account, T extends AccountEnt
         return ruleEngine;
     }
 
-    public Subject getNotificationSubject() {
+    public Subject1 getNotificationSubject() {
         return notificationSubject;
     }
 

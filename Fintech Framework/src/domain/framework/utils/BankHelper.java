@@ -9,6 +9,7 @@ import domain.framework.rules.RuleEngine;
 import domain.framework.usecase.notification.observer.EmailSender;
 import domain.framework.usecase.notification.observer.Observer;
 import domain.framework.usecase.notification.subject.Subject;
+import domain.framework.usecase.notification.subject.Subject1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class BankHelper {
         return new RuleEngine<>();
     }
 
-    public static List<Rule<Account, AccountEntry>> getDepositOrWithdrawRules(Subject notificationSubject) {
+    public static List<Rule<Account, AccountEntry>> getDepositOrWithdrawRules(Subject1 notificationSubject) {
         List<Observer> observers = new ArrayList<>();
         observers.add(EmailSender.getInstance());
         for (Observer observer : observers) {

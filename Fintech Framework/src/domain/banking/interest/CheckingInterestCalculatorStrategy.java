@@ -7,7 +7,7 @@ public class CheckingInterestCalculatorStrategy implements InterestCalculatorStr
     private final double percent = 0.01;
 
     @Override
-    public double getMonthlyInterest(double balance) {
+    public double calculateInterest(double balance) {
         return balance * percent;
     }
 }

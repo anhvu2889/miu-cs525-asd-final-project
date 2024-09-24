@@ -1,9 +1,6 @@
 package domain.banking;
 
-import domain.framework.entity.Account;
-import domain.framework.entity.AccountEntry;
-import domain.framework.entity.Customer;
-import domain.framework.entity.Event;
+import domain.framework.entity.*;
 import domain.framework.usecase.management.AccountFactory;
 import domain.framework.usecase.notification.subject.NotifySubject;
 import domain.framework.usecase.operation.AccountOperationServiceImpl;
@@ -38,7 +35,7 @@ public class BankService {
     public void deposit(String accountNumber, double amount) throws Exception {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
-            AccountEntry entry = account.createEntry(amount, "Amount deposit", Event.DEPOSIT);
+            AccountEntry entry = account.createEntry(amount, "Amount deposit", TransactionType.DEPOSIT);
             this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositOrWithdrawRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.deposit(account, entry);
             return;
@@ -49,7 +46,7 @@ public class BankService {
     public void withdraw(String accountNumber, double amount) throws Exception {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
-            AccountEntry entry = account.createEntry(amount, "Amount withdraw", Event.WITHDRAW);
+            AccountEntry entry = account.createEntry(amount, "Amount withdraw", TransactionType.WITHDRAWAL);
             this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositOrWithdrawRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.withdraw(account, entry);
             return;
