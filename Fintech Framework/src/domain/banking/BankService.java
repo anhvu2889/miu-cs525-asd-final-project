@@ -36,7 +36,7 @@ public class BankService {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
             AccountEntry entry = account.createEntry(amount, "Amount deposit", TransactionType.DEPOSIT);
-            this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositOrWithdrawRules(accountOperationService.getNotificationSubject()));
+            this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.deposit(account, entry);
             return;
         }
@@ -47,7 +47,7 @@ public class BankService {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
             AccountEntry entry = account.createEntry(amount, "Amount withdraw", TransactionType.WITHDRAWAL);
-            this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositOrWithdrawRules(accountOperationService.getNotificationSubject()));
+            this.accountOperationService.getRuleEngine().setRules(BankHelper.getWithdrawRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.withdraw(account, entry);
             return;
         }

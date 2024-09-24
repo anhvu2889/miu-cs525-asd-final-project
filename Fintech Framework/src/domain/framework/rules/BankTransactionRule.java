@@ -5,16 +5,16 @@ import domain.framework.entity.AccountEntry;
 import domain.framework.entity.TransactionType;
 
 public interface BankTransactionRule<E extends Account, T extends AccountEntry> extends Rule<E, T> {
-    default public boolean matches(E account, T entry) {
+    default boolean matches(E account, T entry) {
         return matches(account, entry.getAmount(), entry.getDescription(), entry.getTransactionType());
     }
 
-    default public void apply(E bankAccount, T entry) {
-        apply(bankAccount, entry.getAmount(), entry.getDescription(), entry.getTransactionType());
+    default void apply(E account, T entry) {
+        apply(account, entry.getAmount(), entry.getDescription(), entry.getTransactionType());
     }
 
-    public boolean matches(E bankAccount, Double amount, String description, TransactionType event);
+    boolean matches(E account, Double amount, String description, TransactionType transactionType);
 
 
-    public void apply(E bankAccount, Double amount, String description, TransactionType event);
+    void apply(E account, Double amount, String description, TransactionType transactionType);
 }
