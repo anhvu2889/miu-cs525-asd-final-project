@@ -11,6 +11,8 @@ import domain.framework.usecase.notification.observer.Observer;
 import domain.framework.usecase.notification.subject.Subject;
 import domain.framework.usecase.notification.subject.Subject1;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,16 @@ public class BankHelper {
         rules.add(new CompanyDepositRule(notificationSubject));
         rules.add(new PersonalDepositRule(notificationSubject));
         return rules;
+    }
+
+
+    public static boolean isInLastMonth(LocalDate dateToCheck) {
+        LocalDate today = LocalDate.now();  // Get the current date
+        LocalDate oneMonthAgo = today.minus(1, ChronoUnit.MONTHS);  // Get the date one month ago
+
+        // Check if the date is between one month ago and today (inclusive)
+        return (dateToCheck.isAfter(oneMonthAgo) || dateToCheck.isEqual(oneMonthAgo))
+                && (dateToCheck.isBefore(today) || dateToCheck.isEqual(today));
     }
 
 }

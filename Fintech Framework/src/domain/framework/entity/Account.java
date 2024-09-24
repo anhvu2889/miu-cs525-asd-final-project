@@ -1,7 +1,9 @@
 package domain.framework.entity;
 
 import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
+import domain.framework.utils.BankHelper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,15 @@ public class Account {
 
     public void addInterest() {
         double interest = this.interestCalculatorStrategy.calculateInterest(getBalance());
+        handleInterest(interest);
+
+    }
+
+    protected void handleInterest(double interest) {
+        addToEntry(interest);
+    }
+
+    private void addToEntry(double interest) {
         AccountEntry entry = this.createEntry(interest, "interest", TransactionType.ADD_INTEREST);
         this.addEntry(entry);
     }
