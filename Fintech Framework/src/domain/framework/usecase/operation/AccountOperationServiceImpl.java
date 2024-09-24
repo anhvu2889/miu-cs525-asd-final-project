@@ -1,45 +1,62 @@
 package domain.framework.usecase.operation;
 
 import domain.framework.entity.Account;
-import domain.framework.usecase.operation.interest.InterestCalculator;
+import domain.framework.entity.AccountEntry;
+import domain.framework.rules.RuleEngine;
+import domain.framework.usecase.notification.subject.Subject1;
+import driver.repository.AccountRepository;
 
-public abstract class AccountOperationServiceImpl implements AccountOperationService{
+public class AccountOperationServiceImpl<E extends Account, T extends AccountEntry> implements AccountOperationService<E, T> {
 
-    private final Account account;
-    private InterestCalculator interestCalculator;
+    private final AccountRepository repository;
+    private final RuleEngine<E, T> ruleEngine;
+    private final Subject1 notificationSubject;
 
-    public AccountOperationServiceImpl(Account account) {
-        this.account = account;
+    public AccountOperationServiceImpl(AccountRepository accountRepository, RuleEngine<E, T> ruleEngine, Subject1 notificationSubject) {
+        this.ruleEngine = ruleEngine;
+        this.repository = accountRepository;
+        this.notificationSubject = notificationSubject;
     }
 
-    public void setInterestCalculator(InterestCalculator interestCalculator) {
-        this.interestCalculator = interestCalculator;
+    public AccountRepository getRepository() {
+        return repository;
+    }
+
+    public RuleEngine<E, T> getRuleEngine() {
+        return ruleEngine;
+    }
+
+    public Subject1 getNotificationSubject() {
+        return notificationSubject;
     }
 
     @Override
-    public void deposit(double amount) {
-        account.deposit(amount);
-        postProcessing(amount);
+    public void deposit(E e, T t) {
+        try {
+            this.ruleEngine.process(e, t);
+            e.deposit(t.getAmount(), t.getDescription());
+            this.repository.update(e);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void withdraw(double amount) {
-        account.withdraw(amount);
-        postProcessing(amount);
+    public void withdraw(E e, T t) {
+        try {
+            this.ruleEngine.process(e, t);
+            e.withdraw(t.getAmount(), t.getDescription());
+            this.repository.update(e);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void addInterest() {
-
-//        double amount = interestCalculator.calculateInterest(account.getBalance());
-//        account.addInterest(amount);
-//        loadAllAccount().forEach();
-        account.calculateInterest(account.getBalance());
+        for (Account account : this.repository.getAllAccounts()) {
+            account.addInterest();
+            this.repository.update(account);
+        }
     }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    protected abstract void postProcessing(double amount);
 }

@@ -2,16 +2,14 @@ package domain.creditcard.usecase.management;
 
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
-import domain.framework.usecase.operation.interest.InterestCalculator;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
-import java.util.Locale;
 
-public  class AccountReportService {
+public class AccountReportService {
     private Account account;
     private AccountReportFactory accountReportFactory;
+
     public AccountReportService(Account account) {
         this.account = account;
     }
@@ -28,7 +26,7 @@ public  class AccountReportService {
         //TODO: calculate
         List<AccountEntry> entries = account.getEntries();
         LocalDate today = LocalDate.now();
-        LocalDate previousMonth =  LocalDate.now().minusMonths(1);
+        LocalDate previousMonth = LocalDate.now().minusMonths(1);
         return 0;
     }
 

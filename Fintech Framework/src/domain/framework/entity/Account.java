@@ -1,14 +1,15 @@
 package domain.framework.entity;
 
-import domain.framework.usecase.operation.interest.InterestCalculator;
+import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Account implements InterestCalculator {
+public class Account {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
+    private InterestCalculatorStrategy interestCalculatorStrategy;
 
     public Account(String number, Customer customer) {
         this.number = number;
@@ -39,20 +40,27 @@ public abstract class Account implements InterestCalculator {
         return balance;
     }
 
-    public void deposit(double amount) {
-        AccountEntry entry = new AccountEntry(amount, TransactionType.DEPOSIT);
+    public void deposit(double amount, String description) {
+        AccountEntry entry = new AccountEntry(amount, description, TransactionType.DEPOSIT);
         entries.add(entry);
     }
 
-    public void withdraw(double amount) {
-        AccountEntry entry = new AccountEntry(-amount, TransactionType.WITHDRAWAL);
+    public void withdraw(double amount, String description) {
+        AccountEntry entry = new AccountEntry(-amount, description, TransactionType.WITHDRAWAL);
         entries.add(entry);
     }
 
-    public void addInterest(double amount) {
-        AccountEntry entry = new AccountEntry(amount, TransactionType.ADD_INTEREST);
-        entries.add(entry);
+    public void addInterest() {
+        double interest = this.interestCalculatorStrategy.calculateInterest(getBalance());
+        AccountEntry entry = this.createEntry(interest, "interest", TransactionType.ADD_INTEREST);
+        this.addEntry(entry);
     }
 
+    public void setInterestCalculator(InterestCalculatorStrategy interestCalculatorStrategy) {
+        this.interestCalculatorStrategy = interestCalculatorStrategy;
+    }
 
+    public AccountEntry createEntry(double amount, String description, TransactionType event) {
+        return new AccountEntry(amount, description, event);
+    }
 }
