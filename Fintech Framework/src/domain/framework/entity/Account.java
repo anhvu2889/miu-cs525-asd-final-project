@@ -1,5 +1,7 @@
 package domain.framework.entity;
 
+import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class Account {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
+    private InterestCalculatorStrategy interestCalculatorStrategy;
 
     public Account(String number, Customer customer) {
         this.number = number;
@@ -36,20 +39,27 @@ public class Account {
         return balance;
     }
 
-    public void deposit(double amount) {
-        AccountEntry entry = new AccountEntry(amount, "deposit");
+    public void deposit(double amount, String description) {
+        AccountEntry entry = new AccountEntry(amount, description, Event.DEPOSIT);
         entries.add(entry);
     }
 
-    public void withdraw(double amount) {
-        AccountEntry entry = new AccountEntry(-amount, "withdraw");
+    public void withdraw(double amount, String description) {
+        AccountEntry entry = new AccountEntry(-amount, description, Event.WITHDRAW);
         entries.add(entry);
     }
 
-    public void addInterest(double amount) {
-        AccountEntry entry = new AccountEntry(amount, "interest");
-        entries.add(entry);
+    public void addInterest() {
+        double interest = this.interestCalculatorStrategy.getMonthlyInterest(getBalance());
+        AccountEntry entry = this.createEntry(interest, "interest", Event.INTEREST);
+        this.addEntry(entry);
     }
 
+    public void setInterestCalculator(InterestCalculatorStrategy interestCalculatorStrategy) {
+        this.interestCalculatorStrategy = interestCalculatorStrategy;
+    }
 
+    public AccountEntry createEntry(double amount, String description, Event event) {
+        return new AccountEntry(amount, description, event);
+    }
 }

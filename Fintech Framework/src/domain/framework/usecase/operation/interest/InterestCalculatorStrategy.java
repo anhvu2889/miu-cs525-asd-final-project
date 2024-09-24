@@ -1,5 +1,5 @@
 package domain.framework.usecase.operation.interest;
 
-public interface InterestCalculator {
+public interface InterestCalculatorStrategy {
     double getMonthlyInterest(double balance);
 }

@@ -1,13 +1,13 @@
-package domain.banking.usecase.management;
+package domain.banking.factory;
 
-import domain.banking.entity.PersonalAccount;
+import domain.banking.entity.accounts.CheckingAccount;
 import domain.framework.entity.Account;
 import domain.framework.entity.Customer;
 import domain.framework.usecase.management.AccountFactory;
 
-public class PersonalBankingAccountFactory implements AccountFactory {
+public class CheckingAccountFactory implements AccountFactory {
     @Override
     public Account createAccount(String accountNumber, Customer customer) {
-        return new PersonalAccount(accountNumber, customer);
+        return new CheckingAccount(accountNumber, customer);
     }
 }

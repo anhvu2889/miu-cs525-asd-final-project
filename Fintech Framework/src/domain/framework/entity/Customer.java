@@ -5,15 +5,14 @@ import java.time.LocalDate;
 public class Customer {
     private final String name;
     private final Address address;
-    private final LocalDate dateOfBirth;
     private final LocalDate creationDate;
     private final String email;
-    public Customer(String name, Address address, LocalDate dateOfBirth, LocalDate creationDate, String email) {
+
+    public Customer(String name, Address address, String email) {
         this.name = name;
         this.address = address;
-        this.dateOfBirth = dateOfBirth;
-        this.creationDate = creationDate;
         this.email = email;
+        this.creationDate = LocalDate.now();
     }
 
     public String getName() {
@@ -26,5 +25,13 @@ public class Customer {
 
     public LocalDate getCreationDate() {
         return creationDate;
+    }
+
+    public String getCustomerType() {
+        return "Customer";
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
