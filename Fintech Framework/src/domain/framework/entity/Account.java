@@ -1,16 +1,32 @@
 package domain.framework.entity;
 
+import com.fasterxml.jackson.annotation.*;
+import domain.banking.entity.CheckingAccountStrategy;
+import domain.banking.entity.CompanyAccount;
+import domain.banking.entity.PersonalAccount;
+import domain.banking.entity.SavingAccount;
 import domain.framework.usecase.operation.interest.InterestCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,  // Use the "type" field in JSON to identify the subclass
+        include = JsonTypeInfo.As.PROPERTY,  // Include it as a property in the JSON
+        property = "personal"  // The JSON field that tells us which subclass to use
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PersonalAccount.class, name = "personal")
+})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Account implements InterestCalculator {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
 
-    public Account(String number, Customer customer) {
+    @JsonCreator
+    public Account(@JsonProperty("number") String number,
+                   @JsonProperty("customer") Customer customer) {
         this.number = number;
         this.customer = customer;
     }

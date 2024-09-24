@@ -1,13 +1,14 @@
 package domain.framework.usecase.operation;
 
 import domain.framework.entity.Account;
+import driver.repository.AccountRepository;
 
 public abstract class PersonalAccountOperationService extends AccountOperationServiceImpl {
 
     private static final int MIN_AMOUNT = 0;
 
-    public PersonalAccountOperationService(Account account) {
-        super(account);
+    public PersonalAccountOperationService(Account account, AccountRepository accountRepository) {
+        super(account, accountRepository);
 
     }
 

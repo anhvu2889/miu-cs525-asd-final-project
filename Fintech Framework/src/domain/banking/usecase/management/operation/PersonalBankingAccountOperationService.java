@@ -2,11 +2,12 @@ package domain.banking.usecase.management.operation;
 
 import domain.framework.entity.Account;
 import domain.framework.usecase.operation.PersonalAccountOperationService;
+import driver.repository.AccountRepository;
 
 public class PersonalBankingAccountOperationService extends PersonalAccountOperationService {
 
-    public PersonalBankingAccountOperationService(Account account) {
-        super(account);
+    public PersonalBankingAccountOperationService(Account account, AccountRepository aRepository) {
+        super(account, aRepository);
     }
 
     @Override
