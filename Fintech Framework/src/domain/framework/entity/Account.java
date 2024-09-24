@@ -1,9 +1,11 @@
 package domain.framework.entity;
 
+import domain.framework.usecase.operation.interest.InterestCalculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public abstract class Account implements InterestCalculator {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
@@ -24,6 +26,7 @@ public class Account {
     public List<AccountEntry> getEntries() {
         return entries;
     }
+
     public void addEntry(AccountEntry entry) {
         entries.add(entry);
     }
@@ -37,17 +40,17 @@ public class Account {
     }
 
     public void deposit(double amount) {
-        AccountEntry entry = new AccountEntry(amount, "deposit");
+        AccountEntry entry = new AccountEntry(amount, TransactionType.DEPOSIT);
         entries.add(entry);
     }
 
     public void withdraw(double amount) {
-        AccountEntry entry = new AccountEntry(-amount, "withdraw");
+        AccountEntry entry = new AccountEntry(-amount, TransactionType.WITHDRAWAL);
         entries.add(entry);
     }
 
     public void addInterest(double amount) {
-        AccountEntry entry = new AccountEntry(amount, "interest");
+        AccountEntry entry = new AccountEntry(amount, TransactionType.ADD_INTEREST);
         entries.add(entry);
     }
 
