@@ -1,7 +1,7 @@
 package domain.creditcard.usecase;
 
 import domain.creditcard.CreditCardService;
-import domain.creditcard.entity.NewCreditAccountCommandData;
+import domain.creditcard.dto.NewCreditAccountCommandData;
 import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
 import domain.framework.ui.command.UICommand;
 

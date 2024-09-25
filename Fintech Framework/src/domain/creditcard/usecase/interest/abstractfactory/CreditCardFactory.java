@@ -2,7 +2,7 @@ package domain.creditcard.usecase.interest.abstractfactory;
 
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.entity.CreditCardType;
-import domain.creditcard.entity.NewCreditAccountCommandData;
+import domain.creditcard.dto.NewCreditAccountCommandData;
 import domain.creditcard.usecase.interest.miniumpayment.BronzeMinimumPaymentCalculatorStrategy;
 import domain.creditcard.usecase.interest.miniumpayment.GoldMinimumPaymentCalculatorStrategy;
 import domain.creditcard.usecase.interest.miniumpayment.SilverMinimumPaymentCalculatorStrategy;

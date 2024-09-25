@@ -1,7 +1,11 @@
 import domain.creditcard.CreditCardService;
+import domain.creditcard.dto.ChargeCreditAccountCommandData;
+import domain.creditcard.dto.DepositCreditAccountCommandData;
+import domain.creditcard.dto.NewCreditAccountCommandData;
 import domain.creditcard.entity.CreditCardType;
-import domain.creditcard.entity.NewCreditAccountCommandData;
+import domain.creditcard.usecase.ChargeCreditAccountUsecase;
 import domain.creditcard.usecase.CreateCreditAccountUsecase;
+import domain.creditcard.usecase.DepositCreditAccountUsecase;
 import domain.framework.entity.Customer;
 
 import java.time.LocalDate;
@@ -41,6 +45,30 @@ public class Main {
             );
 
             System.out.println(CreditCardService.getInstance().loadAccount("112").getAccountType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Test Deposit credit card
+        DepositCreditAccountUsecase usecase = new DepositCreditAccountUsecase(CreditCardService.getInstance());
+        try {
+            System.out.println("Credit Balance Before deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            usecase.execute(new DepositCreditAccountCommandData(
+                    "111", 100, "deposit"
+            ));
+            System.out.println("Credit Balance After deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Test Withdraw credit card
+        ChargeCreditAccountUsecase chargeUsecase = new ChargeCreditAccountUsecase(CreditCardService.getInstance());
+        try {
+            System.out.println("Credit Balance Before charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            chargeUsecase.execute(new ChargeCreditAccountCommandData(
+                    "111", 100, "deposit"
+            ));
+            System.out.println("Credit Balance After charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
         } catch (Exception e) {
             e.printStackTrace();
         }
