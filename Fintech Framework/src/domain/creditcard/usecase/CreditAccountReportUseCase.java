@@ -1,7 +1,7 @@
 package domain.creditcard.usecase;
 
-import domain.creditcard.CreditCardService;
 import domain.creditcard.dto.BillReportUiDTO;
+import domain.creditcard.service.CreditCardService;
 import domain.framework.ui.command.UICommand;
 
 public class CreditAccountReportUseCase implements UICommand<BillReportUiDTO> {

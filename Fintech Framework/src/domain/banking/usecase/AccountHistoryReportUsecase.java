@@ -1,20 +1,20 @@
 package domain.banking.usecase;
 
-import domain.banking.BankService;
 import domain.banking.entity.dto.BankReportUiDTO;
+import domain.banking.service.BankAccountService;
 import domain.framework.ui.command.UICommand;
 
 public class AccountHistoryReportUsecase implements UICommand<BankReportUiDTO> {
 
-    private final BankService bankService;
+    private final BankAccountService bankAccountService;
 
-    public AccountHistoryReportUsecase(BankService bankService) {
-        this.bankService = bankService;
+    public AccountHistoryReportUsecase(BankAccountService bankAccountService) {
+        this.bankAccountService = bankAccountService;
     }
 
     public void execute(BankReportUiDTO bankReportUiDTO) throws RuntimeException {
         try {
-            bankService.reportAccountHistory(bankReportUiDTO);
+            bankAccountService.reportAccountHistory(bankReportUiDTO);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

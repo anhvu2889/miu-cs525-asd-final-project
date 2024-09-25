@@ -1,11 +1,11 @@
 package domain.creditcard.ui;
 
-import domain.creditcard.service.CreditCardService;
-import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.creditcard.dto.LoadContentCreditUiDTO;
 import domain.creditcard.dto.NewCreditUiDTO;
+import domain.creditcard.service.CreditCardService;
+import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.ui.frame.CreditCardMainFrame;
 import domain.creditcard.usecase.*;
 import domain.framework.ui.command.UICommand;
@@ -22,7 +22,7 @@ public class CreditCardMainFrameBuilder {
     private UICommand<LoadContentCreditUiDTO> frameUpdateUICommand = new LoadCreditCardUiContentUsecase(creditCardServiceImpl);
     private UICommand<DepositUiDTO> depositUICommand = new DepositCreditAccountUsecase(creditCardServiceImpl);
     private UICommand<ChargeCreditUiDTO> chargeUICommand = new ChargeCreditAccountUsecase(creditCardServiceImpl);
-    private UICommand<BillReportUiDTO> billCreationUICommand = new CreditAccountReportUseCase(creditCardService);
+    private UICommand<BillReportUiDTO> billCreationUICommand = new CreditAccountReportUseCase(creditCardServiceImpl);
     private static String frameTitle = NO_TITLE;
 
     private CreditCardMainFrameBuilder() {

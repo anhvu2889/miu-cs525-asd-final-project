@@ -20,7 +20,7 @@ public class BankApplication {
                 .withWithdrawCommand(new WithdrawAccountUsecase(bankAccountService))
                 .withFrameUpdateCommand(new LoadBankUiContentUsecase(bankAccountService))
                 .withDepositCommand(new DepositAccountUsecase(bankAccountService))
-//                .withAllAccReportCommand(new AccountHistoryReportUsecase(bankAccountService))
+                .withAllAccReportCommand(new AccountHistoryReportUsecase(bankAccountService))
                 .build();
         bankMainFrame.setVisible(true);
     }

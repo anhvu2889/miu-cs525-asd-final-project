@@ -47,7 +47,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     public void deposit(String accountNumber, double amount, String description) throws Exception {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
-        account.withdraw(amount, description);
+        account.deposit(amount, description);
         accountOperationService.getRepository().update(account);
     }
 
@@ -56,7 +56,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         if (amount > 400) {
             accountOperationService.getNotificationSubject().notifyObservers(TransactionType.WITHDRAWAL, account);
         }
-        account.deposit(amount, description);
+        account.withdraw(amount, description);
         accountOperationService.getRepository().update(account);
     }
 
@@ -105,10 +105,11 @@ public class CreditCardServiceImpl implements CreditCardService {
     }
 
     private double getTotalCharges(Account account) {
-        return this.getAccountEntryByTransactionTypeAndMonth(account, TransactionType.WITHDRAWAL, LocalDate.now())
+        double totalCharges = this.getAccountEntryByTransactionTypeAndMonth(account, TransactionType.WITHDRAWAL, LocalDate.now())
                 .stream()
                 .mapToDouble(AccountEntry::getAmount)
                 .sum();
+        return Math.abs(totalCharges);
     }
 
     private double getTotalCredits(Account account) {

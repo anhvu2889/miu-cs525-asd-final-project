@@ -18,7 +18,7 @@ public class CreditApplication {
                 .withFrameUpdateCommand(new LoadCreditCardUiContentUsecase(creditCardService))
                 .withChargeCommand(new ChargeCreditAccountUsecase(creditCardService))
                 .withDepositCommand(new DepositCreditAccountUsecase(creditCardService))
-                .withBillCreationCommand(new CreditAccountReportUseCase(CreditCardService.getInstance()))
+                .withBillCreationCommand(new CreditAccountReportUseCase(creditCardService))
                 .build();
         creditCardMainFrame.setVisible(true);
     }

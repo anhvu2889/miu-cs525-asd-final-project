@@ -2,6 +2,7 @@ package domain.banking.service;
 
 import domain.banking.entity.BankingAccountReport;
 import domain.banking.entity.dto.BankReportUiDTO;
+import domain.banking.rules.BankTransactionRules;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.Customer;
@@ -82,7 +83,6 @@ public class BankAccountServiceImpl implements BankAccountService {
                             && (entry.getDate().isBefore(bankReportUiDTO.getEndDate()) || entry.getDate().isEqual(bankReportUiDTO.getEndDate())))
                     .map(entry -> new BankingAccountReport(account, entry))
                     .collect(Collectors.toList());
-
 
             bankReportUiDTO.setAllAccountsReport(convertBankingAccountReportToString(reports));
             return;
