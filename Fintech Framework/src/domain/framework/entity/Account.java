@@ -60,6 +60,10 @@ public class Account {
         this.interestCalculatorStrategy = interestCalculatorStrategy;
     }
 
+    public InterestCalculatorStrategy getInterestCalculatorStrategy() {
+        return interestCalculatorStrategy;
+    }
+
     public AccountEntry createEntry(double amount, String description, TransactionType event) {
         return new AccountEntry(amount, description, event);
     }

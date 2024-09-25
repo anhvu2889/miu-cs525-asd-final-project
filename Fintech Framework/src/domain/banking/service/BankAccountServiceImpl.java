@@ -1,6 +1,6 @@
 package domain.banking.service;
 
-import domain.banking.rules.BankTransactionRules;
+import domain.banking.entity.BankingAccountReport;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.Customer;
@@ -11,8 +11,9 @@ import domain.framework.usecase.operation.AccountOperationServiceImpl;
 import domain.framework.utils.BankHelper;
 import driver.repository.inmemory.AccountInMemoryRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BankAccountServiceImpl implements BankAccountService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
@@ -68,5 +69,18 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     public Collection<Account> getAccounts() throws Exception {
         return accountOperationService.getRepository().getAllAccounts();
+    }
+
+    public List<BankingAccountReport> reportAccountHistory(String accountNumber, LocalDate startDate, LocalDate endDate) throws Exception {
+        Account account = accountOperationService.getRepository().getAccount(accountNumber);
+        if (account != null) {
+            return account.getEntries()
+                    .stream()
+                    .filter(entry -> (entry.getDate().isAfter(startDate) || entry.getDate().isEqual(startDate))
+                            && (entry.getDate().isBefore(endDate) || entry.getDate().isEqual(endDate)))
+                    .map(entry -> new BankingAccountReport(account, entry))
+                    .collect(Collectors.toList());
+        }
+        throw new Exception("Account with number " + accountNumber + " does not exist");
     }
 }
