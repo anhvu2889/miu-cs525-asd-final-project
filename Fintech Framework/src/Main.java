@@ -1,12 +1,12 @@
 import domain.creditcard.CreditCardService;
-import domain.creditcard.dto.ChargeCreditAccountCommandData;
-import domain.creditcard.dto.DepositCreditAccountCommandData;
-import domain.creditcard.dto.NewCreditAccountCommandData;
+import domain.creditcard.dto.ChargeCreditUiDTO;
+import domain.creditcard.dto.NewCreditUiDTO;
 import domain.creditcard.entity.CreditCardType;
 import domain.creditcard.usecase.ChargeCreditAccountUsecase;
 import domain.creditcard.usecase.CreateCreditAccountUsecase;
 import domain.creditcard.usecase.DepositCreditAccountUsecase;
 import domain.framework.entity.Customer;
+import domain.framework.ui.dto.DepositUiDTO;
 
 import java.time.LocalDate;
 
@@ -27,7 +27,7 @@ public class Main {
         CreateCreditAccountUsecase createCreditAccountUsecase = new CreateCreditAccountUsecase(CreditCardService.getInstance());
         try {
             createCreditAccountUsecase.execute(
-                    new NewCreditAccountCommandData(
+                    new NewCreditUiDTO(
                             "111",
                             new Customer("Test", null, ""),
                             CreditCardType.BRONZE,
@@ -36,7 +36,7 @@ public class Main {
             );
 
             createCreditAccountUsecase.execute(
-                    new NewCreditAccountCommandData(
+                    new NewCreditUiDTO(
                             "112",
                             new Customer("Pass", null, ""),
                             CreditCardType.GOLD,
@@ -53,7 +53,7 @@ public class Main {
         DepositCreditAccountUsecase usecase = new DepositCreditAccountUsecase(CreditCardService.getInstance());
         try {
             System.out.println("Credit Balance Before deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
-            usecase.execute(new DepositCreditAccountCommandData(
+            usecase.execute(new DepositUiDTO(
                     "111", 100, "deposit"
             ));
             System.out.println("Credit Balance After deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
@@ -65,7 +65,7 @@ public class Main {
         ChargeCreditAccountUsecase chargeUsecase = new ChargeCreditAccountUsecase(CreditCardService.getInstance());
         try {
             System.out.println("Credit Balance Before charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
-            chargeUsecase.execute(new ChargeCreditAccountCommandData(
+            chargeUsecase.execute(new ChargeCreditUiDTO(
                     "111", 100, "deposit"
             ));
             System.out.println("Credit Balance After charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());

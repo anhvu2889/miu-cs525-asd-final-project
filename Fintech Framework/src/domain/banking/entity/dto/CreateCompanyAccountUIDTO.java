@@ -1,19 +1,17 @@
-package domain.banking.entity;
+package domain.banking.entity.dto;
 
 import domain.banking.entity.accounts.AccountType;
 import domain.framework.entity.Customer;
 
-public class BankUiCommandData {
+public class CreateCompanyAccountUIDTO {
     private String accountNumber;
     private Customer customer;
     private AccountType accountType;
-    private double amount;
 
-    public BankUiCommandData(String accountNumber, Customer customer, AccountType accountType, double amount) {
+    public CreateCompanyAccountUIDTO(String accountNumber, Customer customer, AccountType accountType) {
         this.accountNumber = accountNumber;
         this.customer = customer;
         this.accountType = accountType;
-        this.amount = amount;
     }
 
     public String getAccountNumber() {
@@ -38,13 +36,5 @@ public class BankUiCommandData {
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 }

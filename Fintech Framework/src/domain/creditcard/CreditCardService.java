@@ -11,6 +11,7 @@ import domain.framework.utils.BankHelper;
 import driver.repository.inmemory.AccountInMemoryRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class CreditCardService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
@@ -41,7 +42,7 @@ public class CreditCardService {
     public void deposit(String accountNumber, double amount, String description) throws Exception {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         account.withdraw(amount, description);
-        accountOperationService.getRepository().save(account);
+        accountOperationService.getRepository().update(account);
     }
 
     public void charge(String accountNumber, double amount, String description) throws Exception {
@@ -50,7 +51,7 @@ public class CreditCardService {
             accountOperationService.getNotificationSubject().notifyObservers(TransactionType.WITHDRAWAL, account);
         }
         account.deposit(amount, description);
-        accountOperationService.getRepository().save(account);
+        accountOperationService.getRepository().update(account);
     }
 
     public CreditAccount loadAccount(String accountNumber) throws Exception {
@@ -60,5 +61,9 @@ public class CreditCardService {
             return (CreditAccount) account;
         }
         throw new Exception("Account with number " + accountNumber + " does not exist");
+    }
+
+    public Collection<Account> getAccounts() throws Exception {
+        return accountOperationService.getRepository().getAllAccounts();
     }
 }

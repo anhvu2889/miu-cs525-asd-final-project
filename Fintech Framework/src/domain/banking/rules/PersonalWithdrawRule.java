@@ -15,13 +15,11 @@ public class PersonalWithdrawRule implements BankTransactionRule<Account, Accoun
 
     @Override
     public boolean matches(Account account, Double amount, String description, TransactionType transactionType) {
-        System.out.println("PersonalWithdrawRule:matches: " + (account.getCustomer().getCustomerType().equals("Person") && account.getBalance() < amount));
         return account.getCustomer().getCustomerType().equals("Person") && account.getBalance() < amount;
     }
 
     @Override
     public void apply(Account account, Double amount, String description, TransactionType transactionType) {
-        System.out.println("PersonalWithdrawRule:apply");
         this.subject.notifyObservers(transactionType, account);
     }
 }
