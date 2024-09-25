@@ -3,7 +3,11 @@ package domain.creditcard.usecase.interest.miniumpayment;
 import domain.framework.usecase.operation.interest.MinimumPaymentCalculatorStrategy;
 
 public class BronzeMinimumPaymentCalculatorStrategy implements MinimumPaymentCalculatorStrategy {
-    private double minimumPaymentRate = 0.14;
+    private final double minimumPaymentRate;
+
+    public BronzeMinimumPaymentCalculatorStrategy(double minimumPaymentRate) {
+        this.minimumPaymentRate = minimumPaymentRate;
+    }
 
     @Override
     public double calculateMinimumPayment(double balance) {
