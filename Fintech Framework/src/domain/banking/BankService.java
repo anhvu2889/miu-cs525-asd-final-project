@@ -68,4 +68,8 @@ public class BankService {
     public Collection<Account> getAccounts() throws Exception {
         return accountOperationService.getRepository().getAllAccounts();
     }
+
+    public Account getAccount(String number) {
+        return accountOperationService.getRepository().getAccount(number);
+    }
 }

@@ -1,5 +1,8 @@
 package domain.framework.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class AccountEntry {
@@ -8,7 +11,10 @@ public class AccountEntry {
     private final String description;
     private final TransactionType transactionType;
 
-    public AccountEntry(double amount, String description, TransactionType transactionType) {
+    @JsonCreator
+    public AccountEntry(@JsonProperty("amount") double amount,
+                        @JsonProperty("description") String description,
+                        @JsonProperty("transactionType") TransactionType transactionType) {
         this.date = LocalDate.now();
         this.amount = amount;
         this.description = description;

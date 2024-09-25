@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="13c4d039-cf5e-478e-973e-0ab2428eb4e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/BankApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/BankApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/ui/BankMainFrameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/ui/BankMainFrameBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/usecase/CreatecompanyAccountUsecase.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/banking/usecase/CreateCompanyAccountUsecase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/BronzeMinimumPaymentCalculatorStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/BronzeMinimumPaymentCalculatorStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/GoldMinimumPaymentCalculatorStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/GoldMinimumPaymentCalculatorStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/SilverMinimumPaymentCalculatorStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fintech Framework/src/domain/creditcard/usecase/interest/miniumpayment/SilverMinimumPaymentCalculatorStrategy.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "git-widget-placeholder": "feature/fix-data-persistence"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+</project>
