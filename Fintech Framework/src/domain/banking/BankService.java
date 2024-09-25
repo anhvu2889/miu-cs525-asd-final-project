@@ -57,4 +57,8 @@ public class BankService {
     public void addInterest() {
         this.accountOperationService.addInterest();
     }
+
+    public Account getAccount(String number) {
+        return accountOperationService.getRepository().getAccount(number);
+    }
 }
