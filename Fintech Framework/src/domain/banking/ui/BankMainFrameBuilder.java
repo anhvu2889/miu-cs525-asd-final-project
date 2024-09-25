@@ -19,7 +19,7 @@ public class BankMainFrameBuilder {
     private BankService accountService = BankService.getInstance();
     private BankFrameConfig mainFrameConfig = new BankFrameConfig();
     private UICommand<CreatePersonalAccountUiDTO> addPersonalAccountUICommand = new CreatePersonalAccountUsecase(accountService);
-    private UICommand<CreateCompanyAccountUIDTO> addCompanyAccountUICommand = new CreateCompanyAccountUsecase(accountService);
+    private UICommand<CreateCompanyAccountUIDTO> addCompanyAccountUICommand = new CreatecompanyAccountUsecase(accountService);
     private UICommand<LoadAccountsContentUIDTO> frameUpdateUICommand = new LoadBankUiContentUsecase(accountService);
     private UICommand<DepositUiDTO> depositUICommand = new DepositAccountUsecase(accountService);
     private UICommand<WithdrawUiDTO> withdrawUICommand = new WithdrawAccountUsecase(accountService);

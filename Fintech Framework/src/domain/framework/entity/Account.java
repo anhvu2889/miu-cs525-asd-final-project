@@ -1,23 +1,17 @@
 package domain.framework.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
     private final String number;
     private final Customer customer;
     private final List<AccountEntry> entries = new ArrayList<>();
     private InterestCalculatorStrategy interestCalculatorStrategy;
 
-    @JsonCreator
-    public Account(@JsonProperty("number") String number,
-                   @JsonProperty("customer") Customer customer) {
+    public Account(String number, Customer customer) {
         this.number = number;
         this.customer = customer;
     }

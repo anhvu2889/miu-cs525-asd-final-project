@@ -12,7 +12,7 @@ public class BankApplication {
                 .withAccountService(BankService.getInstance())
                 .withMainFrameConfig(new BankFrameConfig())
                 .withAddPersonalAccountCommand(new CreatePersonalAccountUsecase(BankService.getInstance()))
-                .withAddCompanyAccountCommand(new CreateCompanyAccountUsecase(BankService.getInstance()))
+                .withAddCompanyAccountCommand(new CreatecompanyAccountUsecase(BankService.getInstance()))
                 .withAddInterestCommand(new AddInterestUsecase(BankService.getInstance()))
                 .withWithdrawCommand(new WithdrawAccountUsecase(BankService.getInstance()))
                 .withFrameUpdateCommand(new LoadBankUiContentUsecase(BankService.getInstance()))

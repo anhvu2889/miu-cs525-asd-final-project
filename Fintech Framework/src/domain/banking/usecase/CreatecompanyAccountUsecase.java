@@ -8,10 +8,10 @@ import domain.banking.factory.SavingAccountFactory;
 import domain.framework.ui.command.UICommand;
 import domain.framework.usecase.management.AccountFactory;
 
-public class CreateCompanyAccountUsecase implements UICommand<CreateCompanyAccountUIDTO> {
+public class CreatecompanyAccountUsecase implements UICommand<CreateCompanyAccountUIDTO> {
     private final BankService bankService;
 
-    public CreateCompanyAccountUsecase(BankService bankService) {
+    public CreatecompanyAccountUsecase(BankService bankService) {
         this.bankService = bankService;
     }
 
