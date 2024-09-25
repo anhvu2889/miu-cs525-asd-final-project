@@ -2,10 +2,10 @@ import domain.banking.BankService;
 import domain.banking.entity.BankUiCommandData;
 import domain.banking.entity.accounts.AccountType;
 import domain.banking.entity.customers.Company;
-import domain.banking.usecase.AddInterestUsecase;
-import domain.banking.usecase.CreateAccountUsecase;
+import domain.banking.entity.customers.Person;
+import domain.banking.entity.dto.CreatePersonalAccountUiDTO;
+import domain.banking.usecase.CreatePersonalAccountUsecase;
 import domain.banking.usecase.DepositAccountUsecase;
-import domain.banking.usecase.WithdrawAccountUsecase;
 import domain.creditcard.CreditCardService;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.creditcard.dto.NewCreditUiDTO;
@@ -23,14 +23,14 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        // CreateAccountUsecase createAccountUsecase = new CreateAccountUsecase(BankService.getInstance());
+         CreatePersonalAccountUsecase personalAccountUsecase = new CreatePersonalAccountUsecase(BankService.getInstance());
 
         //Create account 1
-        // try {
-        //     createAccountUsecase.execute(new BankUiCommandData("113", new Company("Duy", "vduy@gmail.com", null, 9), AccountType.CHECKING, 0.0));
-        // } catch (Exception e) {
-        //     System.out.println(e.getMessage());
-        // }
+         try {
+             personalAccountUsecase.execute(new CreatePersonalAccountUiDTO("113", new Person("Duy", "vduy@gmail.com", null, null), AccountType.CHECKING));
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
 
         //Create account 2
 //        try{
@@ -38,6 +38,14 @@ public class Main {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
+        DepositAccountUsecase depositAccountUsecase = new DepositAccountUsecase(BankService.getInstance());
+
+         try {
+             depositAccountUsecase.execute(new DepositUiDTO("113", 500, "deposit"));
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
 
         // Test create credit card
         CreateCreditAccountUsecase createCreditAccountUsecase = new CreateCreditAccountUsecase(CreditCardService.getInstance());
@@ -50,7 +58,11 @@ public class Main {
                             LocalDate.now()
                     )
             );
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
+        try {
             createCreditAccountUsecase.execute(
                     new NewCreditUiDTO(
                             "112",
@@ -82,7 +94,7 @@ public class Main {
         try {
             System.out.println("Credit Balance Before charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
             chargeUsecase.execute(new ChargeCreditUiDTO(
-                    "111", 100, "deposit"
+                    "111", 100, "charge"
             ));
             System.out.println("Credit Balance After charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
         } catch (Exception e) {
