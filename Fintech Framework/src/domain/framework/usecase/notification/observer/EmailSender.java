@@ -16,7 +16,7 @@ public class EmailSender implements Observer {
     @Override
     public void onUpdate(TransactionType transactionType, Object object) {
         Account acc = (Account) object;
-        System.out.println("[EMAIL]: Event: " + transactionType + ",Account: " + acc.getCustomer().getCustomerType() + ", Email: " + acc.getCustomer().getEmail());
+        System.out.println("[EMAIL]: Event: " + transactionType + ",Account: " + acc.getCustomer().getName() + ", Email: " + acc.getCustomer().getEmail());
     }
 
     @Override
