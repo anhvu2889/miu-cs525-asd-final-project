@@ -1,5 +1,6 @@
 package domain.creditcard.service;
 
+import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.entity.CreditAccountReport;
 import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
@@ -13,6 +14,8 @@ import driver.repository.inmemory.AccountInMemoryRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,8 +73,8 @@ public class CreditCardServiceImpl implements CreditCardService {
         return accountOperationService.getRepository().getAllAccounts();
     }
 
-    public CreditAccountReport generateMonthlyReport(String accountNumber) throws Exception {
-        CreditAccount account = (CreditAccount) accountOperationService.getRepository().getAccount(accountNumber);
+    public void generateMonthlyReport(BillReportUiDTO billReportUiDTO) throws Exception {
+        CreditAccount account = (CreditAccount) accountOperationService.getRepository().getAccount(billReportUiDTO.getAccountNUmber());
         if (account != null) {
             double previousBalance = getPreviousBalance(account);
             double totalCharges = getTotalCharges(account);
@@ -79,9 +82,11 @@ public class CreditCardServiceImpl implements CreditCardService {
             double newBalance = getNewBalance(account);
             double totalDue = account.getMinimumPaymentStrategy().calculateMinimumPayment(newBalance);
 
-            return new CreditAccountReport(account, previousBalance, totalCharges, totalCredits, newBalance, totalDue);
+            CreditAccountReport creditAccountReport = new CreditAccountReport(account, previousBalance, totalCharges, totalCredits, newBalance, totalDue);
+            billReportUiDTO.setMonthlyBillReport(creditAccountReport.toString());
+            return;
         }
-        throw new Exception("Account with number " + accountNumber + " does not exist");
+        throw new Exception("Account with number " + billReportUiDTO.getAccountNUmber() + " does not exist");
     }
 
     private double getPreviousBalance(Account account) {

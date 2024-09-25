@@ -25,7 +25,7 @@ public class BankMainFrameBuilder {
     private UICommand<DepositUiDTO> depositUICommand = new DepositAccountUsecase(accountService);
     private UICommand<WithdrawUiDTO> withdrawUICommand = new WithdrawAccountUsecase(accountService);
     private UICommand<AddInterestUiDTO> addInterestUICommand = new AddInterestUsecase(accountService);
-    //    private UICommand<BankReportUiDTO> generateAllAccReportsUICommand = new AccountHistoryReportUsecase(accountService);
+    private UICommand<BankReportUiDTO> generateAllAccReportsUICommand = new AccountHistoryReportUsecase(accountService);
     private static String frameTitle = FrameTemplate.NO_TITLE;
 
     private BankMainFrameBuilder() {
@@ -71,7 +71,7 @@ public class BankMainFrameBuilder {
     }
 
     public BankMainFrameBuilder withAllAccReportCommand(UICommand<BankReportUiDTO> allAccReportCommand) {
-//        generateAllAccReportsUICommand = allAccReportCommand;
+        generateAllAccReportsUICommand = allAccReportCommand;
         return INSTANCE;
     }
 
@@ -93,7 +93,7 @@ public class BankMainFrameBuilder {
         bankMainFrame.setDepositCommand(depositUICommand);
         bankMainFrame.setWithdrawCommand(withdrawUICommand);
         bankMainFrame.setAddInterestCommand(addInterestUICommand);
-//        bankMainFrame.setAllAccReportCommand(generateAllAccReportsUICommand);
+        bankMainFrame.setAllAccReportCommand(generateAllAccReportsUICommand);
 
         return bankMainFrame;
     }

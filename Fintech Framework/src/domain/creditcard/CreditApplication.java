@@ -5,10 +5,7 @@ import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.ui.CreditCardFrameConfig;
 import domain.creditcard.ui.CreditCardMainFrameBuilder;
 import domain.creditcard.ui.frame.CreditCardMainFrame;
-import domain.creditcard.usecase.ChargeCreditAccountUsecase;
-import domain.creditcard.usecase.CreateCreditAccountUsecase;
-import domain.creditcard.usecase.DepositCreditAccountUsecase;
-import domain.creditcard.usecase.LoadCreditCardUiContentUsecase;
+import domain.creditcard.usecase.*;
 
 public class CreditApplication {
     public static void main(String[] args) {
@@ -21,7 +18,7 @@ public class CreditApplication {
                 .withFrameUpdateCommand(new LoadCreditCardUiContentUsecase(creditCardService))
                 .withChargeCommand(new ChargeCreditAccountUsecase(creditCardService))
                 .withDepositCommand(new DepositCreditAccountUsecase(creditCardService))
-//                .withBillCreationCommand(new BillCreationUICommand(CreditCardService.getInstance()))
+                .withBillCreationCommand(new CreditAccountReportUseCase(CreditCardService.getInstance()))
                 .build();
         creditCardMainFrame.setVisible(true);
     }

@@ -1,6 +1,7 @@
 package domain.banking.service;
 
 import domain.banking.entity.BankingAccountReport;
+import domain.banking.entity.dto.BankReportUiDTO;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.Customer;
@@ -11,7 +12,8 @@ import domain.framework.usecase.operation.AccountOperationServiceImpl;
 import domain.framework.utils.BankHelper;
 import driver.repository.inmemory.AccountInMemoryRepository;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,16 +73,28 @@ public class BankAccountServiceImpl implements BankAccountService {
         return accountOperationService.getRepository().getAllAccounts();
     }
 
-    public List<BankingAccountReport> reportAccountHistory(String accountNumber, LocalDate startDate, LocalDate endDate) throws Exception {
-        Account account = accountOperationService.getRepository().getAccount(accountNumber);
+    public void reportAccountHistory(BankReportUiDTO bankReportUiDTO) throws Exception {
+        Account account = accountOperationService.getRepository().getAccount(bankReportUiDTO.getAccountNUmber());
         if (account != null) {
-            return account.getEntries()
+            List<BankingAccountReport> reports = account.getEntries()
                     .stream()
-                    .filter(entry -> (entry.getDate().isAfter(startDate) || entry.getDate().isEqual(startDate))
-                            && (entry.getDate().isBefore(endDate) || entry.getDate().isEqual(endDate)))
+                    .filter(entry -> (entry.getDate().isAfter(bankReportUiDTO.getStartDate()) || entry.getDate().isEqual(bankReportUiDTO.getStartDate()))
+                            && (entry.getDate().isBefore(bankReportUiDTO.getEndDate()) || entry.getDate().isEqual(bankReportUiDTO.getEndDate())))
                     .map(entry -> new BankingAccountReport(account, entry))
                     .collect(Collectors.toList());
+
+
+            bankReportUiDTO.setAllAccountsReport(convertBankingAccountReportToString(reports));
+            return;
         }
-        throw new Exception("Account with number " + accountNumber + " does not exist");
+        throw new Exception("Account with number " + bankReportUiDTO.getAccountNUmber() + " does not exist");
+    }
+
+    private String convertBankingAccountReportToString(List<BankingAccountReport> reports) {
+        StringBuilder result = new StringBuilder();
+        reports.forEach(r -> {
+            result.append(r.toString()).append("\n\n");
+        });
+        return result.toString();
     }
 }

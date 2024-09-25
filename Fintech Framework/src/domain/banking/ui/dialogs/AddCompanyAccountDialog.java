@@ -6,6 +6,7 @@ import domain.banking.entity.dto.CreateCompanyAccountUIDTO;
 import domain.framework.entity.Address;
 import domain.framework.ui.command.UICommand;
 import domain.framework.ui.frame.FrameTemplate;
+import domain.framework.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +100,7 @@ public class AddCompanyAccountDialog extends JDialog {
             String zip = JTextField_ZIP.getText();
             String state = JTextField_ST.getText();
             String email = JTextField_EM.getText();
-            long numOfEmployees = Long.parseLong(JTextField_NoOfEmp.getText());
+            long numOfEmployees = Utils.parseTextToLong(JTextField_NoOfEmp.getText());
 
             AccountType accountType = JRadioButton_Chk.isSelected() ? AccountType.CHECKING : AccountType.SAVING;
             CreateCompanyAccountUIDTO uiCommandData = new CreateCompanyAccountUIDTO(accNum,

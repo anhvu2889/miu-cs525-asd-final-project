@@ -53,4 +53,16 @@ public class BankingAccountReport extends AccountReport {
     public void setDateAction(LocalDate dateAction) {
         this.dateAction = dateAction;
     }
+
+    @Override
+    public String toString() {
+        return "Customer Name= " + getCustomerName() +
+                "\nCustomer Email= " + getCustomerEmail() +
+                "\nCustomer Address= " + getCustomerAddress() +
+                "\nAccount Number= " + getAccountNumber() +
+                "\nTransaction Type=" + transactionType +
+                "\nAmount=" + amount +
+                "\nDate Action=" + dateAction +
+                "\nDescription=" + description;
+    }
 }

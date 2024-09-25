@@ -36,7 +36,7 @@ public class ReportDialog extends JDialog {
             dispose();
         });
 
-        BankReportUiDTO bankReportUiDTO = new BankReportUiDTO(accountNumber);
+        BankReportUiDTO bankReportUiDTO = new BankReportUiDTO(accountNumber, null, null);
         try {
             reportUICommand.execute(bankReportUiDTO);
             JTextField1.setText(bankReportUiDTO.getAllAccountsReport());

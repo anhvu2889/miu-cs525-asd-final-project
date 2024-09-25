@@ -59,4 +59,17 @@ public class CreditAccountReport extends AccountReport {
     public void setTotalDue(double totalDue) {
         this.totalDue = totalDue;
     }
+
+    @Override
+    public String toString() {
+        return "Customer Name= " + getCustomerName() +
+                "\nCustomer Email= " + getCustomerEmail() +
+                "\nCustomer Address= " + getCustomerAddress() +
+                "\nAccount Number= " + getAccountNumber() +
+                "\nPrevious Balance=" + previousBalance +
+                "\nTotal Charges=" + totalCharges +
+                "\nTotal Credits=" + totalCredits +
+                "\nNew Balance=" + newBalance +
+                "\nTotal Due=" + totalDue;
+    }
 }

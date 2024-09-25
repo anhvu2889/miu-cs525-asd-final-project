@@ -1,6 +1,7 @@
 package domain.banking.entity.dto;
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 public class BankReportUiDTO {
     private String accountNUmber;
@@ -8,10 +9,17 @@ public class BankReportUiDTO {
     private LocalDate endDate;
     private String allAccountsReport;
 
-    public BankReportUiDTO(String accountNUmber) {
+    public BankReportUiDTO(String accountNUmber, LocalDate startDate, LocalDate endDate) {
         this.accountNUmber = accountNUmber;
-        this.startDate = LocalDate.EPOCH;
-        this.endDate = LocalDate.now();
+
+        if (startDate == null || endDate == null) {
+            LocalDate today = LocalDate.now();
+            this.startDate = today.with(TemporalAdjusters.firstDayOfMonth());
+            this.endDate = today.with(TemporalAdjusters.lastDayOfMonth());
+        } else {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
     }
 
     public String getAllAccountsReport() {
