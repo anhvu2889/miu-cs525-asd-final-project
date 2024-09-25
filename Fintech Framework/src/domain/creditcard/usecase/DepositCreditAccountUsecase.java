@@ -1,10 +1,10 @@
 package domain.creditcard.usecase;
 
 import domain.creditcard.CreditCardService;
-import domain.creditcard.dto.DepositCreditAccountCommandData;
 import domain.framework.ui.command.UICommand;
+import domain.framework.ui.dto.DepositUiDTO;
 
-public class DepositCreditAccountUsecase implements UICommand<DepositCreditAccountCommandData> {
+public class DepositCreditAccountUsecase implements UICommand<DepositUiDTO> {
     private final CreditCardService creditCardService;
 
     public DepositCreditAccountUsecase(CreditCardService creditCardService) {
@@ -12,9 +12,9 @@ public class DepositCreditAccountUsecase implements UICommand<DepositCreditAccou
     }
 
     @Override
-    public void execute(DepositCreditAccountCommandData uiCommandData) throws RuntimeException {
+    public void execute(DepositUiDTO uiCommandData) throws RuntimeException {
         try {
-            creditCardService.deposit(uiCommandData.accountNumber(), uiCommandData.amount(), uiCommandData.description());
+            creditCardService.deposit(uiCommandData.getAccountNumber(), uiCommandData.getAmount(), uiCommandData.getDescription());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

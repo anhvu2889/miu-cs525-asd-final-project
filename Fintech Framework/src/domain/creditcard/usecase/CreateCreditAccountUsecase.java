@@ -1,11 +1,11 @@
 package domain.creditcard.usecase;
 
 import domain.creditcard.CreditCardService;
-import domain.creditcard.dto.NewCreditAccountCommandData;
+import domain.creditcard.dto.NewCreditUiDTO;
 import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
 import domain.framework.ui.command.UICommand;
 
-public class CreateCreditAccountUsecase implements UICommand<NewCreditAccountCommandData> {
+public class CreateCreditAccountUsecase implements UICommand<NewCreditUiDTO> {
     private final CreditCardService creditCardService;
 
     public CreateCreditAccountUsecase(CreditCardService creditCardService) {
@@ -13,9 +13,9 @@ public class CreateCreditAccountUsecase implements UICommand<NewCreditAccountCom
     }
 
     @Override
-    public void execute(NewCreditAccountCommandData newCreditAccountCommandData) throws RuntimeException {
+    public void execute(NewCreditUiDTO newCreditUiDTO) throws RuntimeException {
         try {
-            CreditCardFactory factory = new CreditCardFactory(newCreditAccountCommandData);
+            CreditCardFactory factory = new CreditCardFactory(newCreditUiDTO);
             creditCardService.createCreditAccount(factory);
         } catch (Exception e) {
             throw new RuntimeException(e);
