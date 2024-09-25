@@ -1,5 +1,6 @@
-package domain.banking;
+package domain.banking.service;
 
+import domain.banking.rules.BankTransactionRules;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.Customer;
@@ -13,15 +14,15 @@ import driver.repository.inmemory.AccountInMemoryRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BankService {
+public class BankAccountServiceImpl implements BankAccountService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
-    private static BankService instance = new BankService();
+    private static BankAccountServiceImpl instance = new BankAccountServiceImpl();
 
-    public static BankService getInstance() {
-        return BankService.instance;
+    public static BankAccountServiceImpl getInstance() {
+        return BankAccountServiceImpl.instance;
     }
 
-    private BankService() {
+    private BankAccountServiceImpl() {
         this.accountOperationService = new AccountOperationServiceImpl<>(
                 AccountInMemoryRepository.getInstance(),
                 BankHelper.getRuleEngine(),

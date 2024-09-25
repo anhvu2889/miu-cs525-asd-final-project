@@ -1,6 +1,6 @@
 package domain.creditcard.usecase;
 
-import domain.creditcard.CreditCardService;
+import domain.creditcard.service.CreditCardService;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.framework.ui.command.UICommand;
 

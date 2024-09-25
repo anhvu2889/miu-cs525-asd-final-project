@@ -1,5 +1,7 @@
 package domain.banking;
 
+import domain.banking.service.BankAccountService;
+import domain.banking.service.BankAccountServiceImpl;
 import domain.banking.ui.BankFrameConfig;
 import domain.banking.ui.BankMainFrameBuilder;
 import domain.banking.ui.frame.BankMainFrame;
@@ -7,17 +9,18 @@ import domain.banking.usecase.*;
 
 public class BankApplication {
     public static void main(String[] args) {
+        BankAccountService bankAccountService = BankAccountServiceImpl.getInstance();
         BankMainFrame bankMainFrame = BankMainFrameBuilder.getInstance()
                 .withTitle("Bank Application.")
-                .withAccountService(BankService.getInstance())
+                .withAccountService(bankAccountService)
                 .withMainFrameConfig(new BankFrameConfig())
-                .withAddPersonalAccountCommand(new CreatePersonalAccountUsecase(BankService.getInstance()))
-                .withAddCompanyAccountCommand(new CreatecompanyAccountUsecase(BankService.getInstance()))
-                .withAddInterestCommand(new AddInterestUsecase(BankService.getInstance()))
-                .withWithdrawCommand(new WithdrawAccountUsecase(BankService.getInstance()))
-                .withFrameUpdateCommand(new LoadBankUiContentUsecase(BankService.getInstance()))
-                .withDepositCommand(new DepositAccountUsecase(BankService.getInstance()))
-//                .withAllAccReportCommand(new AccountHistoryReportUsecase(BankService.getInstance()))
+                .withAddPersonalAccountCommand(new CreatePersonalAccountUsecase(bankAccountService))
+                .withAddCompanyAccountCommand(new CreatecompanyAccountUsecase(bankAccountService))
+                .withAddInterestCommand(new AddInterestUsecase(bankAccountService))
+                .withWithdrawCommand(new WithdrawAccountUsecase(bankAccountService))
+                .withFrameUpdateCommand(new LoadBankUiContentUsecase(bankAccountService))
+                .withDepositCommand(new DepositAccountUsecase(bankAccountService))
+//                .withAllAccReportCommand(new AccountHistoryReportUsecase(bankAccountService))
                 .build();
         bankMainFrame.setVisible(true);
     }

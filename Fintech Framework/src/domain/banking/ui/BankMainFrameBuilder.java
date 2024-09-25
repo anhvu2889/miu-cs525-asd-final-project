@@ -1,6 +1,7 @@
 package domain.banking.ui;
 
-import domain.banking.BankService;
+import domain.banking.service.BankAccountService;
+import domain.banking.service.BankAccountServiceImpl;
 import domain.banking.entity.dto.AddInterestUiDTO;
 import domain.banking.entity.dto.BankReportUiDTO;
 import domain.banking.entity.dto.CreateCompanyAccountUIDTO;
@@ -16,7 +17,7 @@ import domain.framework.ui.frame.FrameTemplate;
 public class BankMainFrameBuilder {
     private static final BankMainFrameBuilder INSTANCE = new BankMainFrameBuilder();
 
-    private BankService accountService = BankService.getInstance();
+    private BankAccountService accountService = BankAccountServiceImpl.getInstance();
     private BankFrameConfig mainFrameConfig = new BankFrameConfig();
     private UICommand<CreatePersonalAccountUiDTO> addPersonalAccountUICommand = new CreatePersonalAccountUsecase(accountService);
     private UICommand<CreateCompanyAccountUIDTO> addCompanyAccountUICommand = new CreatecompanyAccountUsecase(accountService);
@@ -34,7 +35,7 @@ public class BankMainFrameBuilder {
         return INSTANCE;
     }
 
-    public BankMainFrameBuilder withAccountService(BankService service) {
+    public BankMainFrameBuilder withAccountService(BankAccountService service) {
         accountService = service;
         return INSTANCE;
     }

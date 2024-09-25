@@ -1,18 +1,8 @@
 package presentation.bank;
 
-import domain.banking.BankService;
-import domain.banking.entity.BankUiCommandData;
-import domain.banking.entity.accounts.AccountType;
-import domain.banking.entity.customers.Person;
-import domain.banking.usecase.CreatePersonalAccountUsecase;
-import domain.banking.usecase.DepositAccountUsecase;
-import domain.framework.entity.Address;
-import domain.framework.entity.Customer;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 

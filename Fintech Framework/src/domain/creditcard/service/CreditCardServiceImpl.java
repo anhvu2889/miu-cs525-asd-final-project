@@ -1,4 +1,4 @@
-package domain.creditcard;
+package domain.creditcard.service;
 
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
@@ -13,15 +13,15 @@ import driver.repository.inmemory.AccountInMemoryRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CreditCardService {
+public class CreditCardServiceImpl implements CreditCardService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
-    private static CreditCardService instance = new CreditCardService();
+    private static CreditCardServiceImpl instance = new CreditCardServiceImpl();
 
-    public static CreditCardService getInstance() {
-        return CreditCardService.instance;
+    public static CreditCardServiceImpl getInstance() {
+        return CreditCardServiceImpl.instance;
     }
 
-    private CreditCardService() {
+    private CreditCardServiceImpl() {
         this.accountOperationService = new AccountOperationServiceImpl<>(
                 AccountInMemoryRepository.getInstance(),
                 BankHelper.getRuleEngine(),

@@ -1,4 +1,4 @@
-import domain.creditcard.CreditCardService;
+import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.creditcard.dto.NewCreditUiDTO;
 import domain.creditcard.entity.CreditCardType;
@@ -24,7 +24,7 @@ public class Main {
 //        accountOperationService.withdraw("111", 1000);
 
         // Test create credit card
-        CreateCreditAccountUsecase createCreditAccountUsecase = new CreateCreditAccountUsecase(CreditCardService.getInstance());
+        CreateCreditAccountUsecase createCreditAccountUsecase = new CreateCreditAccountUsecase(CreditCardServiceImpl.getInstance());
         try {
             createCreditAccountUsecase.execute(
                     new NewCreditUiDTO(
@@ -44,31 +44,31 @@ public class Main {
                     )
             );
 
-            System.out.println(CreditCardService.getInstance().loadAccount("112").getAccountType());
+            System.out.println(CreditCardServiceImpl.getInstance().loadAccount("112").getAccountType());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Test Deposit credit card
-        DepositCreditAccountUsecase usecase = new DepositCreditAccountUsecase(CreditCardService.getInstance());
+        DepositCreditAccountUsecase usecase = new DepositCreditAccountUsecase(CreditCardServiceImpl.getInstance());
         try {
-            System.out.println("Credit Balance Before deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            System.out.println("Credit Balance Before deposit: " + CreditCardServiceImpl.getInstance().loadAccount("111").getBalance());
             usecase.execute(new DepositUiDTO(
                     "111", 100, "deposit"
             ));
-            System.out.println("Credit Balance After deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            System.out.println("Credit Balance After deposit: " + CreditCardServiceImpl.getInstance().loadAccount("111").getBalance());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Test Withdraw credit card
-        ChargeCreditAccountUsecase chargeUsecase = new ChargeCreditAccountUsecase(CreditCardService.getInstance());
+        ChargeCreditAccountUsecase chargeUsecase = new ChargeCreditAccountUsecase(CreditCardServiceImpl.getInstance());
         try {
-            System.out.println("Credit Balance Before charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            System.out.println("Credit Balance Before charge: " + CreditCardServiceImpl.getInstance().loadAccount("111").getBalance());
             chargeUsecase.execute(new ChargeCreditUiDTO(
                     "111", 100, "deposit"
             ));
-            System.out.println("Credit Balance After charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
+            System.out.println("Credit Balance After charge: " + CreditCardServiceImpl.getInstance().loadAccount("111").getBalance());
         } catch (Exception e) {
             e.printStackTrace();
         }

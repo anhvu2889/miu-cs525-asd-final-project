@@ -1,6 +1,7 @@
 package domain.creditcard.ui;
 
-import domain.creditcard.CreditCardService;
+import domain.creditcard.service.CreditCardService;
+import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.creditcard.dto.LoadContentCreditUiDTO;
@@ -18,12 +19,12 @@ import static domain.framework.ui.frame.FrameTemplate.NO_TITLE;
 public class CreditCardMainFrameBuilder {
     private static final CreditCardMainFrameBuilder INSTANCE = new CreditCardMainFrameBuilder();
 
-    private CreditCardService creditCardService = CreditCardService.getInstance();
+    private CreditCardService creditCardServiceImpl = CreditCardServiceImpl.getInstance();
     private CreditCardFrameConfig mainFrameConfig = new CreditCardFrameConfig();
-    private UICommand<NewCreditUiDTO> addAccountUICommand = new CreateCreditAccountUsecase(creditCardService);
-    private UICommand<LoadContentCreditUiDTO> frameUpdateUICommand = new LoadCreditCardUiContentUsecase(creditCardService);
-    private UICommand<DepositUiDTO> depositUICommand = new DepositCreditAccountUsecase(creditCardService);
-    private UICommand<ChargeCreditUiDTO> chargeUICommand = new ChargeCreditAccountUsecase(creditCardService);
+    private UICommand<NewCreditUiDTO> addAccountUICommand = new CreateCreditAccountUsecase(creditCardServiceImpl);
+    private UICommand<LoadContentCreditUiDTO> frameUpdateUICommand = new LoadCreditCardUiContentUsecase(creditCardServiceImpl);
+    private UICommand<DepositUiDTO> depositUICommand = new DepositCreditAccountUsecase(creditCardServiceImpl);
+    private UICommand<ChargeCreditUiDTO> chargeUICommand = new ChargeCreditAccountUsecase(creditCardServiceImpl);
     //    private UICommand<BillReportUiDTO> billCreationUICommand = new CreditAccountReportUseCase(creditCardService);
     private static String frameTitle = NO_TITLE;
 
@@ -35,7 +36,7 @@ public class CreditCardMainFrameBuilder {
     }
 
     public CreditCardMainFrameBuilder withAccountService(CreditCardService service) {
-        creditCardService = service;
+        creditCardServiceImpl = service;
         return INSTANCE;
     }
 
