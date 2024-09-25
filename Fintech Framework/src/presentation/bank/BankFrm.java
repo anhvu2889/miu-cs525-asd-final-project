@@ -4,7 +4,7 @@ import domain.banking.BankService;
 import domain.banking.entity.BankUiCommandData;
 import domain.banking.entity.accounts.AccountType;
 import domain.banking.entity.customers.Person;
-import domain.banking.usecase.CreateAccountUsecase;
+import domain.banking.usecase.CreatePersonalAccountUsecase;
 import domain.banking.usecase.DepositAccountUsecase;
 import domain.framework.entity.Address;
 import domain.framework.entity.Customer;
@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 
@@ -219,15 +218,15 @@ public class BankFrm extends JFrame
 
 		if (newaccount){
 
-			AccountType type;
-			if (accountType.equals("Checking"))
-				type = AccountType.CHECKING;
-			else
-				type = AccountType.SAVING;
-
-			BankUiCommandData uiCommandData = new BankUiCommandData(accountnr,
-					new Person(clientName, "test@gmail.com", new Address(street, city, state, zip), LocalDate.now()), type, 0.0);
-			(new CreateAccountUsecase(BankService.getInstance())).execute(uiCommandData);
+//			AccountType type;
+//			if (accountType.equals("Checking"))
+//				type = AccountType.CHECKING;
+//			else
+//				type = AccountType.SAVING;
+//
+//			BankUiCommandData uiCommandData = new BankUiCommandData(accountnr,
+//					new Person(clientName, "test@gmail.com", new Address(street, city, state, zip), LocalDate.now()), type, 0.0);
+//			(new CreatePersonalAccountUsecase(BankService.getInstance())).execute(uiCommandData);
 
 
             // add row to table
@@ -286,9 +285,9 @@ public class BankFrm extends JFrame
 		    dep.show();
     		
 		    // compute new amount
-			BankUiCommandData uiCommandData = new BankUiCommandData(accountnr,
-					new Customer(clientName, null, ""), null, Double.parseDouble(amountDeposit));
-			(new DepositAccountUsecase(BankService.getInstance())).execute(uiCommandData);
+//			BankUiCommandData uiCommandData = new BankUiCommandData(accountnr,
+//					new Customer(clientName, null, ""), null, Double.parseDouble(amountDeposit));
+//			(new DepositAccountUsecase(BankService.getInstance())).execute(uiCommandData);
 
 			long deposit = Long.parseLong(amountDeposit);
             String samount = (String)model.getValueAt(selection, 5);

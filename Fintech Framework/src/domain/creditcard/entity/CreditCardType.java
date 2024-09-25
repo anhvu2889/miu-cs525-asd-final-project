@@ -1,16 +1,26 @@
 package domain.creditcard.entity;
 
 public enum CreditCardType {
-    GOLD(0.06, 0.1),
-    SILVER(0.08, 0.12),
-    BRONZE(0.1, 0.14);
+    GOLD("Gold", 0.06, 0.1),
+    SILVER("Silver", 0.08, 0.12),
+    BRONZE("Bronze", 0.1, 0.14);
 
+    private String name;
     private double monthlyInterestRate;
     private double minimumPaymentRate;
 
-    CreditCardType(double monthlyInterestRate, double minimumPaymentRate) {
+    CreditCardType(String name, double monthlyInterestRate, double minimumPaymentRate) {
+        this.name = name;
         this.monthlyInterestRate = monthlyInterestRate;
         this.minimumPaymentRate = minimumPaymentRate;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getMonthlyInterestRate() {
@@ -28,4 +38,5 @@ public enum CreditCardType {
     public void setMinimumPaymentRate(double minimumPaymentRate) {
         this.minimumPaymentRate = minimumPaymentRate;
     }
+
 }

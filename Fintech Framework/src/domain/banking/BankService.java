@@ -11,6 +11,7 @@ import domain.framework.utils.BankHelper;
 import driver.repository.inmemory.AccountInMemoryRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class BankService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
@@ -62,6 +63,10 @@ public class BankService {
 
     public void addInterest() {
         this.accountOperationService.addInterest();
+    }
+
+    public Collection<Account> getAccounts() throws Exception {
+        return accountOperationService.getRepository().getAllAccounts();
     }
 
     public Account getAccount(String number) {

@@ -1,8 +1,8 @@
 package domain.creditcard.usecase.interest.abstractfactory;
 
+import domain.creditcard.dto.NewCreditUiDTO;
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.entity.CreditCardType;
-import domain.creditcard.dto.NewCreditAccountCommandData;
 import domain.creditcard.usecase.interest.miniumpayment.BronzeMinimumPaymentCalculatorStrategy;
 import domain.creditcard.usecase.interest.miniumpayment.GoldMinimumPaymentCalculatorStrategy;
 import domain.creditcard.usecase.interest.miniumpayment.SilverMinimumPaymentCalculatorStrategy;
@@ -14,20 +14,20 @@ import domain.framework.entity.Customer;
 import domain.framework.usecase.management.AccountFactory;
 
 public class CreditCardFactory implements AccountFactory {
-    NewCreditAccountCommandData newCreditAccountCommandData;
+    NewCreditUiDTO newCreditUiDTO;
 
-    public CreditCardFactory(NewCreditAccountCommandData newCreditAccountCommandData) {
-        this.newCreditAccountCommandData = newCreditAccountCommandData;
+    public CreditCardFactory(NewCreditUiDTO newCreditUiDTO) {
+        this.newCreditUiDTO = newCreditUiDTO;
     }
 
     public Account createCreditAccount() {
         CreditAccount account = new CreditAccount(
-                newCreditAccountCommandData.accountNumber(),
-                newCreditAccountCommandData.customer(),
-                newCreditAccountCommandData.expiredDate(),
-                newCreditAccountCommandData.creditCardType()
+                newCreditUiDTO.getAccountNumber(),
+                newCreditUiDTO.getCustomer(),
+                newCreditUiDTO.getExpiredDate(),
+                newCreditUiDTO.getCreditCardType()
         );
-        CreditCardType creditCardType = newCreditAccountCommandData.creditCardType();
+        CreditCardType creditCardType = newCreditUiDTO.getCreditCardType();
         switch (creditCardType) {
             case GOLD: {
                 account.setInterestCalculator(new GoldMonthlyInterestCalculatorStrategy(creditCardType.getMonthlyInterestRate()));
@@ -55,6 +55,6 @@ public class CreditCardFactory implements AccountFactory {
     }
 
     public String getAccountNumber() {
-        return newCreditAccountCommandData.accountNumber();
+        return newCreditUiDTO.getAccountNumber();
     }
 }

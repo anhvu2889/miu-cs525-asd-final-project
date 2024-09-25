@@ -1,10 +1,10 @@
 package domain.banking.usecase;
 
 import domain.banking.BankService;
-import domain.banking.entity.BankUiCommandData;
 import domain.framework.ui.command.UICommand;
+import domain.framework.ui.dto.WithdrawUiDTO;
 
-public class WithdrawAccountUsecase implements UICommand<BankUiCommandData> {
+public class WithdrawAccountUsecase implements UICommand<WithdrawUiDTO> {
     private final BankService bankService;
 
     public WithdrawAccountUsecase(BankService bankService) {
@@ -12,9 +12,9 @@ public class WithdrawAccountUsecase implements UICommand<BankUiCommandData> {
     }
 
     @Override
-    public void execute(BankUiCommandData uiCommandData) throws RuntimeException {
+    public void execute(WithdrawUiDTO uiCommandData) throws RuntimeException {
         try {
-            bankService.withdraw(uiCommandData.accountNumber(), uiCommandData.amount());
+            bankService.withdraw(uiCommandData.getAccountNumber(), uiCommandData.getAmount());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

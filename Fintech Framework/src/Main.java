@@ -7,14 +7,14 @@ import domain.banking.usecase.CreateAccountUsecase;
 import domain.banking.usecase.DepositAccountUsecase;
 import domain.banking.usecase.WithdrawAccountUsecase;
 import domain.creditcard.CreditCardService;
-import domain.creditcard.dto.ChargeCreditAccountCommandData;
-import domain.creditcard.dto.DepositCreditAccountCommandData;
-import domain.creditcard.dto.NewCreditAccountCommandData;
+import domain.creditcard.dto.ChargeCreditUiDTO;
+import domain.creditcard.dto.NewCreditUiDTO;
 import domain.creditcard.entity.CreditCardType;
 import domain.creditcard.usecase.ChargeCreditAccountUsecase;
 import domain.creditcard.usecase.CreateCreditAccountUsecase;
 import domain.creditcard.usecase.DepositCreditAccountUsecase;
 import domain.framework.entity.Customer;
+import domain.framework.ui.dto.DepositUiDTO;
 
 import java.time.LocalDate;
 
@@ -23,14 +23,14 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        CreateAccountUsecase createAccountUsecase = new CreateAccountUsecase(BankService.getInstance());
+        // CreateAccountUsecase createAccountUsecase = new CreateAccountUsecase(BankService.getInstance());
 
         //Create account 1
-        try {
-            createAccountUsecase.execute(new BankUiCommandData("113", new Company("Duy", "vduy@gmail.com", null, 9), AccountType.CHECKING, 0.0));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        // try {
+        //     createAccountUsecase.execute(new BankUiCommandData("113", new Company("Duy", "vduy@gmail.com", null, 9), AccountType.CHECKING, 0.0));
+        // } catch (Exception e) {
+        //     System.out.println(e.getMessage());
+        // }
 
         //Create account 2
 //        try{
@@ -39,13 +39,28 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        //Deposit
-        DepositAccountUsecase depositAccountUsecase = new DepositAccountUsecase(BankService.getInstance());
-        //Withdraw
-        WithdrawAccountUsecase withdrawAccountUsecase = new WithdrawAccountUsecase(BankService.getInstance());
+        // Test create credit card
+        CreateCreditAccountUsecase createCreditAccountUsecase = new CreateCreditAccountUsecase(CreditCardService.getInstance());
         try {
-            depositAccountUsecase.execute(new BankUiCommandData("113", new Company("Duy", "vduy@gmail.com", null, 9), AccountType.CHECKING, 500.0));
-//            withdrawAccountUsecase.execute(new BankUiCommandData("113", new Company("Duy", "vduy@gmail.com", null, 9), AccountType.CHECKING, 100.0));
+            createCreditAccountUsecase.execute(
+                    new NewCreditUiDTO(
+                            "111",
+                            new Customer("Test", null, ""),
+                            CreditCardType.BRONZE,
+                            LocalDate.now()
+                    )
+            );
+
+            createCreditAccountUsecase.execute(
+                    new NewCreditUiDTO(
+                            "112",
+                            new Customer("Pass", null, ""),
+                            CreditCardType.GOLD,
+                            LocalDate.now()
+                    )
+            );
+
+            System.out.println(CreditCardService.getInstance().loadAccount("112").getAccountType());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -54,7 +69,7 @@ public class Main {
         DepositCreditAccountUsecase usecase = new DepositCreditAccountUsecase(CreditCardService.getInstance());
         try {
             System.out.println("Credit Balance Before deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
-            usecase.execute(new DepositCreditAccountCommandData(
+            usecase.execute(new DepositUiDTO(
                     "111", 100, "deposit"
             ));
             System.out.println("Credit Balance After deposit: " + CreditCardService.getInstance().loadAccount("111").getBalance());
@@ -66,7 +81,7 @@ public class Main {
         ChargeCreditAccountUsecase chargeUsecase = new ChargeCreditAccountUsecase(CreditCardService.getInstance());
         try {
             System.out.println("Credit Balance Before charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
-            chargeUsecase.execute(new ChargeCreditAccountCommandData(
+            chargeUsecase.execute(new ChargeCreditUiDTO(
                     "111", 100, "deposit"
             ));
             System.out.println("Credit Balance After charge: " + CreditCardService.getInstance().loadAccount("111").getBalance());
