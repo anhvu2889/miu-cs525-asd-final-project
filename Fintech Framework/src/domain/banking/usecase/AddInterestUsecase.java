@@ -1,18 +1,18 @@
 package domain.banking.usecase;
 
-import domain.banking.BankService;
+import domain.banking.service.BankAccountService;
 import domain.banking.entity.dto.AddInterestUiDTO;
 import domain.framework.ui.command.UICommand;
 
 public class AddInterestUsecase implements UICommand<AddInterestUiDTO> {
-    private final BankService bankService;
+    private final BankAccountService bankAccountService;
 
-    public AddInterestUsecase(BankService bankService) {
-        this.bankService = bankService;
+    public AddInterestUsecase(BankAccountService bankAccountService) {
+        this.bankAccountService = bankAccountService;
     }
 
     @Override
     public void execute(AddInterestUiDTO uiCommandData) {
-        bankService.addInterest();
+        bankAccountService.addInterest();
     }
 }

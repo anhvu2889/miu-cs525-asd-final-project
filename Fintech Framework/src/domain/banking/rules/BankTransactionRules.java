@@ -1,9 +1,5 @@
-package domain.banking;
+package domain.banking.rules;
 
-import domain.banking.rules.CompanyDepositRule;
-import domain.banking.rules.CompanyWithdrawRule;
-import domain.banking.rules.PersonalDepositRule;
-import domain.banking.rules.PersonalWithdrawRule;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.rules.Rule;

@@ -1,5 +1,7 @@
 package domain.creditcard;
 
+import domain.creditcard.service.CreditCardService;
+import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.ui.CreditCardFrameConfig;
 import domain.creditcard.ui.CreditCardMainFrameBuilder;
 import domain.creditcard.ui.frame.CreditCardMainFrame;
@@ -10,14 +12,15 @@ import domain.creditcard.usecase.LoadCreditCardUiContentUsecase;
 
 public class CreditApplication {
     public static void main(String[] args) {
+        CreditCardService creditCardService = CreditCardServiceImpl.getInstance();
         CreditCardMainFrame creditCardMainFrame = CreditCardMainFrameBuilder.getInstance()
-                .withAccountService(CreditCardService.getInstance())
+                .withAccountService(creditCardService)
                 .withTitle("Credit Card Application")
                 .withMainFrameConfig(new CreditCardFrameConfig())
-                .withAddAccountCommand(new CreateCreditAccountUsecase(CreditCardService.getInstance()))
-                .withFrameUpdateCommand(new LoadCreditCardUiContentUsecase(CreditCardService.getInstance()))
-                .withChargeCommand(new ChargeCreditAccountUsecase(CreditCardService.getInstance()))
-                .withDepositCommand(new DepositCreditAccountUsecase(CreditCardService.getInstance()))
+                .withAddAccountCommand(new CreateCreditAccountUsecase(creditCardService))
+                .withFrameUpdateCommand(new LoadCreditCardUiContentUsecase(creditCardService))
+                .withChargeCommand(new ChargeCreditAccountUsecase(creditCardService))
+                .withDepositCommand(new DepositCreditAccountUsecase(creditCardService))
 //                .withBillCreationCommand(new BillCreationUICommand(CreditCardService.getInstance()))
                 .build();
         creditCardMainFrame.setVisible(true);

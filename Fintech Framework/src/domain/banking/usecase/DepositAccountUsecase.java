@@ -1,20 +1,20 @@
 package domain.banking.usecase;
 
-import domain.banking.BankService;
+import domain.banking.service.BankAccountService;
 import domain.framework.ui.command.UICommand;
 import domain.framework.ui.dto.DepositUiDTO;
 
 public class DepositAccountUsecase implements UICommand<DepositUiDTO> {
-    private final BankService bankService;
+    private final BankAccountService bankAccountService;
 
-    public DepositAccountUsecase(BankService bankService) {
-        this.bankService = bankService;
+    public DepositAccountUsecase(BankAccountService bankAccountService) {
+        this.bankAccountService = bankAccountService;
     }
 
     @Override
     public void execute(DepositUiDTO uiCommandData) throws RuntimeException {
         try {
-            bankService.deposit(uiCommandData.getAccountNumber(), uiCommandData.getAmount());
+            bankAccountService.deposit(uiCommandData.getAccountNumber(), uiCommandData.getAmount());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
