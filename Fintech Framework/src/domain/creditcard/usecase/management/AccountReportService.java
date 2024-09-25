@@ -16,7 +16,7 @@ public class AccountReportService {
 
     public MonthyReport generateReport() {
         double monthlyInterest = accountReportFactory.getInterestCalculator().calculateInterest(account.getBalance());
-        double totalDue = accountReportFactory.getMinimumPaymentCalculator().calculateMinimumPayment();
+        double totalDue = accountReportFactory.getMinimumPaymentCalculator().calculateMinimumPayment(account.getBalance());
         MonthyReport monthyReport = new MonthyReport(getPreviousBalance(), getTotalCharge(), getTotalCredits(), monthlyInterest, totalDue);
         return monthyReport;
     }
