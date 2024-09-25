@@ -6,16 +6,16 @@ import domain.framework.entity.TransactionType;
 import domain.framework.rules.BankTransactionRule;
 import domain.framework.usecase.notification.subject.Subject1;
 
-public class PersonalDepositRule implements BankTransactionRule<Account, AccountEntry> {
+public class CompanyWithdrawRule implements BankTransactionRule<Account, AccountEntry> {
     private final Subject1 subject;
 
-    public PersonalDepositRule(Subject1 notificationSubject) {
-        this.subject = notificationSubject;
+    public CompanyWithdrawRule(Subject1 subject) {
+        this.subject = subject;
     }
 
     @Override
     public boolean matches(Account account, Double amount, String description, TransactionType transactionType) {
-        return account.getCustomer().getCustomerType().equals("Person") && amount > 500;
+        return account.getCustomer().getCustomerType().equals("Company");
     }
 
     @Override
