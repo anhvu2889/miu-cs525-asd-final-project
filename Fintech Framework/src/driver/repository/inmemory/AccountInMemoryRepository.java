@@ -24,7 +24,6 @@ public class AccountInMemoryRepository implements AccountRepository {
     @Override
     public void save(Account account) {
         accounts.add(account);
-        System.out.println("Saved account: " + account.getNumber());
     }
 
     @Override

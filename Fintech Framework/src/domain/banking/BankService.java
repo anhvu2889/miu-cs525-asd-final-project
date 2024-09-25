@@ -1,11 +1,16 @@
 package domain.banking;
 
-import domain.framework.entity.*;
+import domain.framework.entity.Account;
+import domain.framework.entity.AccountEntry;
+import domain.framework.entity.Customer;
+import domain.framework.entity.TransactionType;
 import domain.framework.usecase.management.AccountFactory;
 import domain.framework.usecase.notification.subject.NotifySubject;
 import domain.framework.usecase.operation.AccountOperationServiceImpl;
 import domain.framework.utils.BankHelper;
 import driver.repository.inmemory.AccountInMemoryRepository;
+
+import java.util.ArrayList;
 
 public class BankService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
@@ -19,7 +24,8 @@ public class BankService {
         this.accountOperationService = new AccountOperationServiceImpl<>(
                 AccountInMemoryRepository.getInstance(),
                 BankHelper.getRuleEngine(),
-                new NotifySubject()
+                new NotifySubject(),
+                new ArrayList<>()
         );
     }
 
@@ -36,7 +42,7 @@ public class BankService {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
             AccountEntry entry = account.createEntry(amount, "Amount deposit", TransactionType.DEPOSIT);
-            this.accountOperationService.getRuleEngine().setRules(BankHelper.getDepositRules(accountOperationService.getNotificationSubject()));
+            this.accountOperationService.getRuleEngine().setRules(BankTransactionRules.getDepositRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.deposit(account, entry);
             return;
         }
@@ -47,7 +53,7 @@ public class BankService {
         Account account = accountOperationService.getRepository().getAccount(accountNumber);
         if (account != null) {
             AccountEntry entry = account.createEntry(amount, "Amount withdraw", TransactionType.WITHDRAWAL);
-            this.accountOperationService.getRuleEngine().setRules(BankHelper.getWithdrawRules(accountOperationService.getNotificationSubject()));
+            this.accountOperationService.getRuleEngine().setRules(BankTransactionRules.getWithdrawRules(accountOperationService.getNotificationSubject()));
             this.accountOperationService.withdraw(account, entry);
             return;
         }
