@@ -2,7 +2,7 @@ package domain.creditcard.usecase;
 
 import domain.creditcard.service.CreditCardService;
 import domain.creditcard.dto.NewCreditUiDTO;
-import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
+import domain.creditcard.factory.CreditCardFactory;
 import domain.framework.ui.command.UICommand;
 
 public class CreateCreditAccountUsecase implements UICommand<NewCreditUiDTO> {

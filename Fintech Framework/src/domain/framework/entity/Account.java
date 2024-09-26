@@ -1,6 +1,6 @@
 package domain.framework.entity;
 
-import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
+import domain.framework.strategy.interest.InterestCalculatorStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

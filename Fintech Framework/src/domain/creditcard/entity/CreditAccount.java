@@ -1,9 +1,8 @@
 package domain.creditcard.entity;
 
-import domain.banking.entity.accounts.AccountType;
 import domain.framework.entity.Account;
 import domain.framework.entity.Customer;
-import domain.framework.usecase.operation.interest.MinimumPaymentCalculatorStrategy;
+import domain.framework.strategy.interest.MinimumPaymentCalculatorStrategy;
 
 import java.time.LocalDate;
 
