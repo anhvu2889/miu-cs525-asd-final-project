@@ -14,6 +14,7 @@ import domain.framework.ui.dto.LoadAccountsContentUIDTO;
 import domain.framework.ui.dto.WithdrawUiDTO;
 import domain.framework.ui.frame.FrameTemplate;
 
+@SuppressWarnings("ALL")
 public class BankMainFrameBuilder {
     private static final BankMainFrameBuilder INSTANCE = new BankMainFrameBuilder();
 

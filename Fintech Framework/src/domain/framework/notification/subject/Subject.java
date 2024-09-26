@@ -1,13 +1,12 @@
 package domain.framework.notification.subject;
 
+import domain.framework.entity.TransactionType;
 import domain.framework.notification.observer.Observer;
 
 public interface Subject {
-    void registerObserver(EventType eventType, Observer observer);
+    void registerObserver(Observer observer);
 
-    void removeObserver(EventType eventType, Observer observer);
+    void removeObserver(Observer observer);
 
-    void triggerEvent(EventType eventType);
-
-    void notifyObservers(EventType eventType);
+    void notifyObservers(TransactionType event, Object object);
 }
