@@ -5,7 +5,7 @@ import domain.framework.entity.AccountEntry;
 import domain.framework.rules.RuleEngine;
 import domain.framework.notification.observer.EmailSender;
 import domain.framework.notification.observer.Observer;
-import domain.framework.notification.subject.Subject1;
+import domain.framework.notification.subject.Subject;
 import domain.framework.repository.AccountRepository;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class AccountOperationServiceImpl<E extends Account, T extends AccountEnt
 
     private final AccountRepository repository;
     private final RuleEngine<E, T> ruleEngine;
-    private final Subject1 notificationSubject;
+    private final Subject notificationSubject;
 
-    public AccountOperationServiceImpl(AccountRepository accountRepository, RuleEngine<E, T> ruleEngine, Subject1 notificationSubject, List<Observer> observers) {
+    public AccountOperationServiceImpl(AccountRepository accountRepository, RuleEngine<E, T> ruleEngine, Subject notificationSubject, List<Observer> observers) {
         this.ruleEngine = ruleEngine;
         this.repository = accountRepository;
         this.notificationSubject = notificationSubject;
@@ -35,7 +35,7 @@ public class AccountOperationServiceImpl<E extends Account, T extends AccountEnt
         return ruleEngine;
     }
 
-    public Subject1 getNotificationSubject() {
+    public Subject getNotificationSubject() {
         return notificationSubject;
     }
 

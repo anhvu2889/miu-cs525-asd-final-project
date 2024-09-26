@@ -6,7 +6,7 @@ import domain.framework.notification.observer.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifySubject implements Subject1 {
+public class NotifySubject implements Subject {
     protected List<Observer> observerList = new ArrayList<>();
 
     public List<Observer> getObserverList() {

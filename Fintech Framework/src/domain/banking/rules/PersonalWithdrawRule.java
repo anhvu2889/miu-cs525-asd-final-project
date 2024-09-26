@@ -4,12 +4,12 @@ import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.TransactionType;
 import domain.framework.rules.BankTransactionRule;
-import domain.framework.notification.subject.Subject1;
+import domain.framework.notification.subject.Subject;
 
 public class PersonalWithdrawRule implements BankTransactionRule<Account, AccountEntry> {
-    private final Subject1 subject;
+    private final Subject subject;
 
-    public PersonalWithdrawRule(Subject1 notificationSubject) {
+    public PersonalWithdrawRule(Subject notificationSubject) {
         this.subject = notificationSubject;
     }
 
