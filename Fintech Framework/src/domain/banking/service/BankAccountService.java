@@ -1,5 +1,6 @@
 package domain.banking.service;
 
+import domain.banking.entity.dto.BankReportUiDTO;
 import domain.framework.entity.Account;
 import domain.framework.entity.Customer;
 import domain.framework.usecase.management.AccountFactory;
@@ -16,4 +17,6 @@ public interface BankAccountService {
     void addInterest();
 
     Collection<Account> getAccounts() throws Exception;
+
+    void reportAccountHistory(BankReportUiDTO bankReportUiDTO) throws Exception;
 }

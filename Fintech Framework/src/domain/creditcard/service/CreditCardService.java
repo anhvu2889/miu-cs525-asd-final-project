@@ -1,5 +1,6 @@
 package domain.creditcard.service;
 
+import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
 import domain.framework.entity.Account;
@@ -16,4 +17,6 @@ public interface CreditCardService {
     CreditAccount loadAccount(String accountNumber) throws Exception;
 
     Collection<Account> getAccounts() throws Exception;
+
+    void generateMonthlyReport(BillReportUiDTO billReportUiDTO) throws Exception;
 }

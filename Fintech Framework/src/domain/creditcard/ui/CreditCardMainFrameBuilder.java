@@ -1,16 +1,13 @@
 package domain.creditcard.ui;
 
-import domain.creditcard.service.CreditCardService;
-import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.dto.ChargeCreditUiDTO;
 import domain.creditcard.dto.LoadContentCreditUiDTO;
 import domain.creditcard.dto.NewCreditUiDTO;
+import domain.creditcard.service.CreditCardService;
+import domain.creditcard.service.CreditCardServiceImpl;
 import domain.creditcard.ui.frame.CreditCardMainFrame;
-import domain.creditcard.usecase.ChargeCreditAccountUsecase;
-import domain.creditcard.usecase.CreateCreditAccountUsecase;
-import domain.creditcard.usecase.DepositCreditAccountUsecase;
-import domain.creditcard.usecase.LoadCreditCardUiContentUsecase;
+import domain.creditcard.usecase.*;
 import domain.framework.ui.command.UICommand;
 import domain.framework.ui.dto.DepositUiDTO;
 
@@ -25,7 +22,7 @@ public class CreditCardMainFrameBuilder {
     private UICommand<LoadContentCreditUiDTO> frameUpdateUICommand = new LoadCreditCardUiContentUsecase(creditCardServiceImpl);
     private UICommand<DepositUiDTO> depositUICommand = new DepositCreditAccountUsecase(creditCardServiceImpl);
     private UICommand<ChargeCreditUiDTO> chargeUICommand = new ChargeCreditAccountUsecase(creditCardServiceImpl);
-    //    private UICommand<BillReportUiDTO> billCreationUICommand = new CreditAccountReportUseCase(creditCardService);
+    private UICommand<BillReportUiDTO> billCreationUICommand = new CreditAccountReportUseCase(creditCardServiceImpl);
     private static String frameTitle = NO_TITLE;
 
     private CreditCardMainFrameBuilder() {
@@ -61,7 +58,7 @@ public class CreditCardMainFrameBuilder {
     }
 
     public CreditCardMainFrameBuilder withBillCreationCommand(UICommand<BillReportUiDTO> billCreationCommand) {
-//        billCreationUICommand = billCreationCommand;
+        billCreationUICommand = billCreationCommand;
         return INSTANCE;
     }
 
@@ -81,7 +78,7 @@ public class CreditCardMainFrameBuilder {
         creditCardMainFrame.setFrameUpdateCommand(frameUpdateUICommand);
         creditCardMainFrame.setDepositCommand(depositUICommand);
         creditCardMainFrame.setChargeCreditCardCommand(chargeUICommand);
-//        creditCardMainFrame.setBillReportCommand(billCreationUICommand);
+        creditCardMainFrame.setBillReportCommand(billCreationUICommand);
         return creditCardMainFrame;
     }
 }

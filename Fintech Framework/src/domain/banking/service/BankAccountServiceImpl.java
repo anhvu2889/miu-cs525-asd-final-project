@@ -1,5 +1,7 @@
 package domain.banking.service;
 
+import domain.banking.entity.BankingAccountReport;
+import domain.banking.entity.dto.BankReportUiDTO;
 import domain.banking.rules.BankTransactionRules;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
@@ -13,6 +15,8 @@ import driver.repository.inmemory.AccountInMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BankAccountServiceImpl implements BankAccountService {
     private final AccountOperationServiceImpl<Account, AccountEntry> accountOperationService;
@@ -68,5 +72,29 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     public Collection<Account> getAccounts() throws Exception {
         return accountOperationService.getRepository().getAllAccounts();
+    }
+
+    public void reportAccountHistory(BankReportUiDTO bankReportUiDTO) throws Exception {
+        Account account = accountOperationService.getRepository().getAccount(bankReportUiDTO.getAccountNUmber());
+        if (account != null) {
+            List<BankingAccountReport> reports = account.getEntries()
+                    .stream()
+                    .filter(entry -> (entry.getDate().isAfter(bankReportUiDTO.getStartDate()) || entry.getDate().isEqual(bankReportUiDTO.getStartDate()))
+                            && (entry.getDate().isBefore(bankReportUiDTO.getEndDate()) || entry.getDate().isEqual(bankReportUiDTO.getEndDate())))
+                    .map(entry -> new BankingAccountReport(account, entry))
+                    .collect(Collectors.toList());
+
+            bankReportUiDTO.setAllAccountsReport(convertBankingAccountReportToString(reports));
+            return;
+        }
+        throw new Exception("Account with number " + bankReportUiDTO.getAccountNUmber() + " does not exist");
+    }
+
+    private String convertBankingAccountReportToString(List<BankingAccountReport> reports) {
+        StringBuilder result = new StringBuilder();
+        reports.forEach(r -> {
+            result.append(r.toString()).append("\n\n");
+        });
+        return result.toString();
     }
 }

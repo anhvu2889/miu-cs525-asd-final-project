@@ -60,7 +60,7 @@ public class CreditCardFrameConfig implements FrameConfig<CreditAccount> {
         rowdata[1] = account.getNumber();
         rowdata[2] = account.getExprDate();
         rowdata[3] = account.getAccountType().getName();
-        rowdata[4] = account.getBalance();
+        rowdata[4] = account.getBalance() != 0 ? account.getBalance() * -1 : account.getBalance();
         return rowdata;
     }
 

@@ -9,6 +9,7 @@ import domain.banking.entity.dto.CreatePersonalAccountUiDTO;
 import domain.framework.entity.Address;
 import domain.framework.ui.command.UICommand;
 import domain.framework.ui.frame.FrameTemplate;
+import domain.framework.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -105,7 +106,7 @@ public class AddPersonalAccountDialog extends JDialog {
             String zip = JTextField_ZIP.getText();
             String state = JTextField_ST.getText();
             String email = JTextField_EM.getText();
-            LocalDate birthday = LocalDate.parse(JTextField_BD.getText());
+            LocalDate birthday = Utils.parseTextToLocalDate(JTextField_BD.getText());
 
             AccountType accountType = JRadioButton_Chk.isSelected() ? AccountType.CHECKING : AccountType.SAVING;
             CreatePersonalAccountUiDTO uiCommandData = new CreatePersonalAccountUiDTO(accNum,
