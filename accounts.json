@@ -1,0 +1,49 @@
+[ {
+  "number" : "111",
+  "customer" : {
+    "name" : "Test",
+    "address" : null,
+    "email" : "",
+    "creationDate" : [ 2024, 9, 25 ],
+    "customerType" : "Customer"
+  },
+  "entries" : [ {
+    "amount" : 100.0,
+    "description" : "deposit",
+    "transactionType" : "DEPOSIT",
+    "date" : [ 2024, 9, 25 ]
+  }, {
+    "amount" : -100.0,
+    "description" : "deposit",
+    "transactionType" : "WITHDRAWAL",
+    "date" : [ 2024, 9, 25 ]
+  } ],
+  "interestCalculatorStrategy" : {
+    "monthlyInterest" : 0.1
+  },
+  "exprDate" : [ 2024, 9, 25 ],
+  "accountType" : "BRONZE",
+  "minimumPaymentStrategy" : {
+    "minimumPaymentRate" : 0.14
+  },
+  "balance" : 0.0
+}, {
+  "number" : "112",
+  "customer" : {
+    "name" : "Pass",
+    "address" : null,
+    "email" : "",
+    "creationDate" : [ 2024, 9, 25 ],
+    "customerType" : "Customer"
+  },
+  "entries" : [ ],
+  "interestCalculatorStrategy" : {
+    "monthlyInterest" : 0.06
+  },
+  "exprDate" : [ 2024, 9, 25 ],
+  "accountType" : "GOLD",
+  "minimumPaymentStrategy" : {
+    "minimumPaymentRate" : 0.1
+  },
+  "balance" : 0.0
+} ]

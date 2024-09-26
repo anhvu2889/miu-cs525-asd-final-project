@@ -1,5 +1,8 @@
 package domain.framework.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AccountReport {
     private String customerName;
     private String customerEmail;
