@@ -3,7 +3,7 @@ package domain.banking.rules;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.rules.Rule;
-import domain.framework.usecase.notification.subject.Subject1;
+import domain.framework.notification.subject.Subject1;
 
 import java.util.ArrayList;
 import java.util.List;

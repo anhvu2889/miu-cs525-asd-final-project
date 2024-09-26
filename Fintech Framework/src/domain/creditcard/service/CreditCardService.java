@@ -2,7 +2,7 @@ package domain.creditcard.service;
 
 import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.entity.CreditAccount;
-import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
+import domain.creditcard.factory.CreditCardFactory;
 import domain.framework.entity.Account;
 
 import java.util.Collection;

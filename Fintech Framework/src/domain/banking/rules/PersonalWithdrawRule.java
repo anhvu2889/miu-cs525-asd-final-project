@@ -4,7 +4,7 @@ import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.TransactionType;
 import domain.framework.rules.BankTransactionRule;
-import domain.framework.usecase.notification.subject.Subject1;
+import domain.framework.notification.subject.Subject1;
 
 public class PersonalWithdrawRule implements BankTransactionRule<Account, AccountEntry> {
     private final Subject1 subject;

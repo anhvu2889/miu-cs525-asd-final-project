@@ -3,14 +3,14 @@ package domain.creditcard.service;
 import domain.creditcard.dto.BillReportUiDTO;
 import domain.creditcard.entity.CreditAccount;
 import domain.creditcard.entity.CreditAccountReport;
-import domain.creditcard.usecase.interest.abstractfactory.CreditCardFactory;
+import domain.creditcard.factory.CreditCardFactory;
 import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.TransactionType;
-import domain.framework.usecase.notification.subject.NotifySubject;
-import domain.framework.usecase.operation.AccountOperationServiceImpl;
+import domain.framework.notification.subject.NotifySubject;
+import domain.framework.facadeservice.AccountOperationServiceImpl;
 import domain.framework.utils.BankHelper;
-import driver.repository.inmemory.AccountInMemoryRepository;
+import domain.framework.repository.inmemory.AccountInMemoryRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;

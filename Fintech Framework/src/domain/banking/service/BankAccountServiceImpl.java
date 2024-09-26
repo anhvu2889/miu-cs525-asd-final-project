@@ -7,11 +7,11 @@ import domain.framework.entity.Account;
 import domain.framework.entity.AccountEntry;
 import domain.framework.entity.Customer;
 import domain.framework.entity.TransactionType;
-import domain.framework.usecase.management.AccountFactory;
-import domain.framework.usecase.notification.subject.NotifySubject;
-import domain.framework.usecase.operation.AccountOperationServiceImpl;
+import domain.framework.factory.AccountFactory;
+import domain.framework.notification.subject.NotifySubject;
+import domain.framework.facadeservice.AccountOperationServiceImpl;
 import domain.framework.utils.BankHelper;
-import driver.repository.inmemory.AccountInMemoryRepository;
+import domain.framework.repository.inmemory.AccountInMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;

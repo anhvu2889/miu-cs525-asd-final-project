@@ -1,6 +1,6 @@
 package domain.banking.usecase.interest.calculator;
 
-import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
+import domain.framework.strategy.interest.InterestCalculatorStrategy;
 
 public class PersonalBankingAccountInterestCalculator implements InterestCalculatorStrategy {
     @Override

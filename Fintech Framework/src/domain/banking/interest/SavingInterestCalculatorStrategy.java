@@ -1,6 +1,6 @@
 package domain.banking.interest;
 
-import domain.framework.usecase.operation.interest.InterestCalculatorStrategy;
+import domain.framework.strategy.interest.InterestCalculatorStrategy;
 
 public class SavingInterestCalculatorStrategy implements InterestCalculatorStrategy {
 

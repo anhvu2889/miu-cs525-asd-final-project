@@ -6,7 +6,7 @@ import domain.banking.factory.CheckingAccountFactory;
 import domain.banking.factory.SavingAccountFactory;
 import domain.banking.service.BankAccountService;
 import domain.framework.ui.command.UICommand;
-import domain.framework.usecase.management.AccountFactory;
+import domain.framework.factory.AccountFactory;
 
 public class CreatePersonalAccountUsecase implements UICommand<CreatePersonalAccountUiDTO> {
     private final BankAccountService bankAccountService;
