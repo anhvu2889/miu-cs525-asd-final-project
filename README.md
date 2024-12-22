@@ -1,4 +1,8 @@
-# Computer Professionals Program at MIU (ASD - Final Project)
+# MIU - ASD Final Project: Banking and Credit Card Processing Systems
+
+This repository contains the final project for the **ASD (Advanced Software Design)** course, part of the graduate Computer Science program at **Maharishi International University (MIU)**.
+
+---
 
 ## Project Overview
 The **Advanced Software Design (ASD) Final Project** focuses on developing a framework to support multiple applications, including a **Banking System** and a **Credit Card Processing System**. Students will implement reusable patterns, frameworks, and architectures while designing scalable and maintainable software.
@@ -97,9 +101,3 @@ Contributions are welcome! Follow these steps to contribute:
 2. Create a new branch for your feature or bug fix.
 3. Commit your changes with a descriptive message.
 4. Submit a pull request for review.
-
----
-
-## Contact
-For questions or suggestions, please reach out to the course instructor or create an issue in the repository.
-
